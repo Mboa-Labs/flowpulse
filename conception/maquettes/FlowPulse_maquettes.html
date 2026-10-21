@@ -11,13 +11,13 @@
 <style>
   /* Une barre d'onglets en haut (un onglet = un écran), puis l'écran en pleine largeur ; aplats uniquement, aucun dégradé */
   :root {
-    --encre: #1B1F2A; --emeraude: #13A06F; --soleil: #F5B700;
-    --bg: #F5F7F8; --surface: #FFFFFF; --surface-2: #EEF2F1; --border: #DDE3E1;
+    --encre: #1B1F2A; --emeraude: #13A06F; --cuivre: #C2703D;
+    --bg: #F6F6F3; --surface: #FFFFFF; --surface-2: #EFEFEA; --border: #E3E2DB;
     --text: #1B1F2A; --text-2: #4E5866; --text-3: #687282;
-    --primary: #0B7A52; --primary-hover: #086443; --on-primary: #FFFFFF; --primary-soft: #E3F4EC; --accent-soft: #FFF4CC;
+    --primary: #0B7A52; --primary-hover: #086443; --on-primary: #FFFFFF; --primary-soft: #E3F4EC; --accent-soft: #F6E9DF;
     --focus: #1C7ED6; --nav-bg: #1B1F2A; --nav-text: #C9D1DC; --nav-active: #2A3040;
     --fluide: #1F9D55; --modere: #D99800; --dense: #E8590C; --sature: #C92A2A; --info: #1971C2;
-    --map-bg: #EEF2F1; --map-road: #FFFFFF; --map-road-2: #E2E8E6; --map-water: #DCE7EC;
+    --map-bg: #EEEEE8; --map-road: #FFFFFF; --map-road-2: #E2E8E6; --map-water: #E1E5E6;
     --f-display: "Lexend", "Segoe UI", system-ui, sans-serif;
     --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
     --f-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
@@ -28,7 +28,7 @@
     :root:not([data-theme="light"]) {
       --bg: #11141B; --surface: #1B1F2A; --surface-2: #242A38; --border: #313849;
       --text: #EEF1F5; --text-2: #B3BBC8; --text-3: #8F98A8;
-      --primary: #2BC48A; --primary-hover: #4FD6A1; --on-primary: #10231B; --primary-soft: #173D30; --accent-soft: #3A3115;
+      --primary: #2BC48A; --primary-hover: #4FD6A1; --on-primary: #10231B; --primary-soft: #173D30; --accent-soft: #3A2618;
       --focus: #4DABF7; --nav-bg: #0B0E14; --nav-text: #B3BBC8; --nav-active: #1E2431;
       --fluide: #37B26C; --modere: #F2B21C; --dense: #FF7A33; --sature: #F05252; --info: #4DABF7;
       --map-bg: #1A1F29; --map-road: #2C3342; --map-road-2: #242A36; --map-water: #1C2633;
@@ -39,7 +39,7 @@
   :root[data-theme="dark"] {
     --bg: #11141B; --surface: #1B1F2A; --surface-2: #242A38; --border: #313849;
     --text: #EEF1F5; --text-2: #B3BBC8; --text-3: #8F98A8;
-    --primary: #2BC48A; --primary-hover: #4FD6A1; --on-primary: #10231B; --primary-soft: #173D30; --accent-soft: #3A3115;
+    --primary: #2BC48A; --primary-hover: #4FD6A1; --on-primary: #10231B; --primary-soft: #173D30; --accent-soft: #3A2618;
     --focus: #4DABF7; --nav-bg: #0B0E14; --nav-text: #B3BBC8; --nav-active: #1E2431;
     --fluide: #37B26C; --modere: #F2B21C; --dense: #FF7A33; --sature: #F05252; --info: #4DABF7;
     --map-bg: #1A1F29; --map-road: #2C3342; --map-road-2: #242A36; --map-water: #1C2633;
@@ -301,13 +301,35 @@
   /* Admin */
   .health { display: flex; align-items: center; gap: 8px; font-size: 13.5px; }
 
+
+  /* Charte (onglet) */
+  .ch { display: grid; gap: 18px; padding: 28px; }
+  .ch-sec { display: grid; gap: 14px; }
+  .ch-sec > h3 { font-size: 18px; }
+  .ch-lead { color: var(--text-2); max-width: 72ch; }
+  .lockup { display: flex; align-items: center; gap: 12px; }
+  .lockup svg { width: 44px; height: 44px; }
+  .lockup b { font: 700 26px var(--f-display); letter-spacing: -0.01em; }
+  .lockup b span { font-weight: 400; }
+  .stage-logo { border-radius: var(--r-lg); display: grid; place-items: center; gap: 10px; padding: 30px 16px; }
+  .sw { display: grid; gap: 6px; min-width: 0; }
+  .sw i { display: flex; align-items: end; height: 64px; border-radius: var(--r-md); padding: 8px 10px; font: 500 12px var(--f-mono); border: 1px solid rgba(0,0,0,.06); font-style: normal; }
+  .sw b { font: 600 14px var(--f-display); }
+  .sw span { font-size: 12.5px; color: var(--text-2); }
+  .ramp6 { display: grid; grid-template-columns: repeat(6, 1fr); gap: 3px; }
+  .ramp6 i { height: 34px; border-radius: 6px; }
+  .type-line { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 14px; align-items: baseline; padding-block: 10px; border-bottom: 1px solid var(--border); }
+  .type-line:last-child { border-bottom: 0; }
+  .type-line .spec { font: 12.5px var(--f-mono); color: var(--text-3); }
+  @media (max-width: 600px) { .type-line { grid-template-columns: minmax(0, 1fr); gap: 2px; } .ch { padding: 16px; } }
+  .rules { margin: 0; padding-left: 18px; display: grid; gap: 7px; color: var(--text-2); }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
-    <symbol id="logo" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#1B1F2A"/><path d="M22 50V16H42M22 32H36" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="45" cy="16" r="5" fill="#F5B700" stroke="#1B1F2A" stroke-width="2.5"/><circle cx="39" cy="32" r="5" fill="#13A06F" stroke="#1B1F2A" stroke-width="2.5"/><circle cx="22" cy="50" r="5" fill="#fff" stroke="#1B1F2A" stroke-width="2.5"/></symbol>
-    <symbol id="logo-inv" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#fff"/><path d="M22 50V16H42M22 32H36" fill="none" stroke="#1B1F2A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="45" cy="16" r="5" fill="#F5B700" stroke="#fff" stroke-width="2.5"/><circle cx="39" cy="32" r="5" fill="#13A06F" stroke="#fff" stroke-width="2.5"/><circle cx="22" cy="50" r="5" fill="#1B1F2A" stroke="#fff" stroke-width="2.5"/></symbol>
+    <symbol id="logo" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#1B1F2A"/><path d="M22 50V16H42M22 32H36" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="45" cy="16" r="5" fill="#C2703D" stroke="#1B1F2A" stroke-width="2.5"/><circle cx="39" cy="32" r="5" fill="#13A06F" stroke="#1B1F2A" stroke-width="2.5"/><circle cx="22" cy="50" r="5" fill="#fff" stroke="#1B1F2A" stroke-width="2.5"/></symbol>
+    <symbol id="logo-inv" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#fff"/><path d="M22 50V16H42M22 32H36" fill="none" stroke="#1B1F2A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="45" cy="16" r="5" fill="#C2703D" stroke="#fff" stroke-width="2.5"/><circle cx="39" cy="32" r="5" fill="#13A06F" stroke="#fff" stroke-width="2.5"/><circle cx="22" cy="50" r="5" fill="#1B1F2A" stroke="#fff" stroke-width="2.5"/></symbol>
     <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-9.5Z"/></symbol>
     <symbol id="i-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Z"/><path d="M9 4v14M15 6v14"/></symbol>
     <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 20h20L12 3Z"/><path d="M12 10v4M12 17h.01"/></symbol>
@@ -337,7 +359,8 @@
   <div class="mk-top-in">
     <div class="mk-title"><svg aria-hidden="true"><use href="#logo"/></svg><span>Maquettes FlowPulse</span></div>
     <div class="mk-tabs" role="tablist" aria-label="Écrans">
-      <button role="tab" data-s="landing" aria-selected="true">Landing</button>
+      <button role="tab" data-s="charte" aria-selected="true">Charte</button>
+      <button role="tab" data-s="landing" aria-selected="false">Landing</button>
       <button role="tab" data-s="connexion" aria-selected="false">Connexion</button>
       <button role="tab" data-s="tableau" aria-selected="false">Tableau de bord</button>
       <button role="tab" data-s="alertes" aria-selected="false">Alertes</button>
@@ -356,8 +379,98 @@
   </div>
 </header>
 
+<!-- ============ CHARTE ============ -->
+<section class="screen" id="s-charte">
+  <div class="stage">
+    <div class="frame-cap"><h2>Charte graphique</h2><p>Les règles communes à la landing page et à l'application. Chaque écran des onglets suivants les applique.</p></div>
+    <div class="frame" style="background:var(--surface)"><div class="ch">
+
+      <div class="ch-sec">
+        <span class="eyebrow">Style</span>
+        <h3 style="font-size:24px">Sobre, précis, premium</h3>
+        <p class="ch-lead">Encre profonde, émeraude et une touche de cuivre sur des neutres chauds. Aplats uniquement, jamais de dégradé. Beaucoup d'espace, des bordures fines et des ombres à peine visibles : la qualité se voit dans les détails, pas dans les effets.</p>
+      </div>
+
+      <div class="ch-sec">
+        <h3>Logo</h3>
+        <div class="grid-3">
+          <div class="stage-logo" style="background:#F6F6F3;border:1px solid #E3E2DB"><div class="lockup"><svg aria-hidden="true"><use href="#logo"/></svg><b style="color:#1B1F2A">Flow<span style="color:#0B7A52">Pulse</span></b></div><span class="label">Principal · fond clair</span></div>
+          <div class="stage-logo" style="background:#1B1F2A"><div class="lockup"><svg aria-hidden="true"><use href="#logo-inv"/></svg><b style="color:#fff">Flow<span style="color:#2BC48A">Pulse</span></b></div><span class="label" style="color:#9AA3B2">Inversé · fond encre</span></div>
+          <div class="stage-logo" style="background:#0B7A52"><div class="lockup"><svg aria-hidden="true"><use href="#logo"/></svg><b style="color:#fff">Flow<span>Pulse</span></b></div><span class="label" style="color:#CFEBDD">Sur fond émeraude</span></div>
+        </div>
+        <p class="small muted">Le F est un plan de lignes de bus : arrêt cuivre en haut, émeraude au milieu, blanc au départ. Espace libre autour du symbole : ¼ de sa largeur. Taille minimale : 16 px.</p>
+      </div>
+
+      <div class="ch-sec">
+        <h3>Couleurs de marque</h3>
+        <div class="grid-4">
+          <div class="sw"><i style="background:#1B1F2A;color:#fff">#1B1F2A</i><b>Encre</b><span>Textes, navigation, symbole</span></div>
+          <div class="sw"><i style="background:#13A06F;color:#fff">#13A06F</i><b>Émeraude</b><span>Marque, icônes actives</span></div>
+          <div class="sw"><i style="background:#0B7A52;color:#fff">#0B7A52</i><b>Émeraude profond</b><span>Boutons, liens (contraste AA)</span></div>
+          <div class="sw"><i style="background:#C2703D;color:#fff">#C2703D</i><b>Cuivre</b><span>Accent rare : mise en avant</span></div>
+        </div>
+        <div class="grid-4">
+          <div class="sw"><i style="background:#F6F6F3;color:#1B1F2A">#F6F6F3</i><b>Fond</b><span>Fond de page</span></div>
+          <div class="sw"><i style="background:#FFFFFF;color:#1B1F2A">#FFFFFF</i><b>Surface</b><span>Cartes, panneaux</span></div>
+          <div class="sw"><i style="background:#EFEFEA;color:#1B1F2A">#EFEFEA</i><b>Surface 2</b><span>Zones secondaires</span></div>
+          <div class="sw"><i style="background:#E3E2DB;color:#1B1F2A">#E3E2DB</i><b>Bordure</b><span>Traits fins de 1 px</span></div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>États de circulation</h3>
+          <div class="row"><span class="badge b-fluide"><svg aria-hidden="true"><use href="#i-check"/></svg>Fluide</span><span class="badge b-modere"><svg aria-hidden="true"><use href="#i-alert"/></svg>Modéré</span><span class="badge b-dense"><svg aria-hidden="true"><use href="#i-alert"/></svg>Dense</span><span class="badge b-sature"><svg aria-hidden="true"><use href="#i-alert"/></svg>Saturé</span><span class="badge b-info">Information</span></div>
+          <p class="small muted">Réservés aux données de circulation, toujours avec un libellé. L'émeraude de marque ne signifie jamais « fluide ».</p>
+        </div>
+        <div class="card">
+          <h3>Densité de population</h3>
+          <div class="ramp6"><i style="background:#F1E4D6"></i><i style="background:#E6C3A1"></i><i style="background:#D59A6C"></i><i style="background:#C2703D"></i><i style="background:#93412C"></i><i style="background:#5A2230"></i></div>
+          <div class="row between small muted"><span>&lt; 500 pers./km²</span><span>&gt; 8 000 pers./km²</span></div>
+          <p class="small muted">Six classes en aplats, du sable au bordeaux, en cellules hexagonales. Lisible par les daltoniens, sans opposition rouge / vert.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Typographie</h3>
+        <div>
+          <div class="type-line"><span class="spec">Display · Lexend 48</span><span style="font:600 clamp(30px,4vw,46px)/1.1 var(--f-display);letter-spacing:-0.025em">Anticiper la congestion</span></div>
+          <div class="type-line"><span class="spec">Titre · Lexend 24</span><span style="font:600 24px var(--f-display)">Alertes actives</span></div>
+          <div class="type-line"><span class="spec">Corps · Atkinson 16</span><span>Forte tension prévue à Mokolo vers 17 h 45 : environ 420 personnes en attente.</span></div>
+          <div class="type-line"><span class="spec">Étiquette · Lexend 12</span><span class="label">Niveau de congestion</span></div>
+          <div class="type-line"><span class="spec">Chiffre · Lexend 28</span><span class="num" style="font:600 28px var(--f-display)">1 284 <small class="muted" style="font-size:14px">pers./km²</small></span></div>
+          <div class="type-line"><span class="spec">Référence · Plex Mono</span><span class="mono">Loi n° 2024/017 · art. XX</span></div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Composants</h3>
+          <div class="row"><button class="btn btn-primary" type="button"><svg aria-hidden="true"><use href="#i-check"/></svg>Appliquer</button><button class="btn btn-secondary" type="button">Transmettre</button><button class="btn btn-ghost" type="button">Voir le raisonnement</button><button class="btn btn-danger" type="button">Rejeter</button></div>
+          <div class="row"><span class="line" style="background:#13A06F">1</span><span class="line" style="background:#1C7ED6">2</span><span class="line" style="background:#D6336C">3</span><span class="line" style="background:#7048E8">4</span><span class="line" style="background:#0C8599">5</span><span class="line" style="background:#495057">6</span><a class="cite" href="#charte">Code des CTD · art. XX</a></div>
+          <div class="alert-item"><i style="background:var(--sature)"></i><div class="in"><div class="row between"><b>Pic de foule · Mokolo</b><span class="badge b-sature">Saturé</span></div><div class="facts"><span>Pic <b>17 h 45</b></span><span>Attente <b>≈ 420</b></span></div></div></div>
+        </div>
+        <div class="card">
+          <h3>Règles de style</h3>
+          <ul class="rules">
+            <li>Aplats uniquement : aucun dégradé, ni sur les fonds, ni sur les cartes, ni sur les boutons.</li>
+            <li>Un seul bouton principal par zone ; le libellé dit ce qui va se passer.</li>
+            <li>Bordures de 1 px, ombres légères seulement pour ce qui flotte (menu, fenêtre).</li>
+            <li>Cuivre rare : un détail par écran au plus, jamais pour signaler un état.</li>
+            <li>Espacements par multiples de 4 px ; respirer plutôt que remplir.</li>
+            <li>Coins arrondis : 6 px badges, 10 px boutons, 14 px cartes, 20 px landing.</li>
+            <li>Icônes Lucide au trait de 1,75 px, toujours avec un libellé.</li>
+            <li>Thème clair par défaut, thème sombre en option ; contraste AA dans les deux.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div></div>
+  </div>
+</section>
+
 <!-- ============ LANDING ============ -->
-<section class="screen" id="s-landing">
+<section class="screen" id="s-landing" hidden>
   <div class="stage">
     <div class="frame-cap"><h2>Landing page</h2><p>Page publique : présenter FlowPulse au jury, aux municipalités et aux opérateurs, puis mener à la démo.</p></div>
     <div class="frame lp">
@@ -498,7 +611,7 @@
               <svg class="base hexmap" data-seed="2" data-hot="0.36,0.34,1;0.66,0.58,0.75;0.2,0.72,0.45" data-line="1" data-pins="1" viewBox="0 0 860 520" role="img" aria-label="Carte de densité par quartier avec axes et alertes"></svg>
               <div class="map-tools"><span class="on">Densité</span><span>Axes</span><span>Lignes de bus</span><span>Prévision +1 h</span></div>
               <div class="map-zoom"><span>+</span><span>−</span></div>
-              <div class="legend"><span class="label">Densité · pers./km²</span><div class="ramp"><i style="background:#FBF0B8"></i><i style="background:#FAD46A"></i><i style="background:#F5A23A"></i><i style="background:#E8682C"></i><i style="background:#C2264B"></i><i style="background:#6A1B5F"></i></div><div class="row between" style="gap:4px"><span>&lt; 500</span><span>&gt; 8 000</span></div></div>
+              <div class="legend"><span class="label">Densité · pers./km²</span><div class="ramp"><i style="background:#F1E4D6"></i><i style="background:#E6C3A1"></i><i style="background:#D59A6C"></i><i style="background:#C2703D"></i><i style="background:#93412C"></i><i style="background:#5A2230"></i></div><div class="row between" style="gap:4px"><span>&lt; 500</span><span>&gt; 8 000</span></div></div>
               <div class="timeline"><div class="row between small"><b style="font:600 12.5px var(--f-display)">Aujourd'hui</b><span class="muted">Prévision jusqu'à 19 h</span></div><div class="tl-hours"><i style="height:30%"></i><i style="height:42%"></i><i style="height:55%"></i><i style="height:48%"></i><i style="height:40%"></i><i style="height:44%"></i><i style="height:52%"></i><i style="height:66%"></i><i class="now" style="height:74%"></i><i class="fut" style="height:88%"></i><i class="fut" style="height:96%"></i><i class="fut" style="height:70%"></i></div><div class="tl-lbl"><span>8 h</span><span>11 h</span><span>14 h</span><span>17 h</span><span>19 h</span></div></div>
             </div>
             <div style="display:grid;gap:14px">
@@ -871,7 +984,7 @@
   });
 
   /* ---------- Cartes en cellules hexagonales (aplats, aucun dégradé) ---------- */
-  var RAMP = ["#FBF0B8", "#FAD46A", "#F5A23A", "#E8682C", "#C2264B", "#6A1B5F"];
+  var RAMP = ["#F1E4D6", "#E6C3A1", "#D59A6C", "#C2703D", "#93412C", "#5A2230"];
   function rnd(seed) { var s = seed * 9301 + 49297; return function () { s = (s * 9301 + 49297) % 233280; return s / 233280; }; }
   function cssVar(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
   function drawMap(svg) {
@@ -930,9 +1043,9 @@
   if (window.matchMedia) { try { window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", drawAll); } catch (e) {} }
 
   /* ---------- Écrans ---------- */
-  var IDS = ["landing", "connexion", "tableau", "alertes", "flotte", "recommandation", "superviseur", "simulation", "manques", "admin"];
+  var IDS = ["charte", "landing", "connexion", "tableau", "alertes", "flotte", "recommandation", "superviseur", "simulation", "manques", "admin"];
   function show(id) {
-    if (IDS.indexOf(id) < 0) id = "landing";
+    if (IDS.indexOf(id) < 0) id = "charte";
     IDS.forEach(function (s) { var el = document.getElementById("s-" + s); if (el) el.hidden = s !== id; });
     document.querySelectorAll(".mk-tabs button").forEach(function (b) { b.setAttribute("aria-selected", String(b.dataset.s === id)); });
   }
