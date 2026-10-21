@@ -1,0 +1,142 @@
+<title>Logo FlowPulse</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Sora:wght@500;700&family=Manrope:wght@500;800&family=Urbanist:wght@500;800&family=Lexend:wght@400;700&display=swap">
+<style>
+  /* Planche de choix : 4 pistes côte à côte, chaque carte montre le logo sur fond clair et sombre, en lockup, en petites tailles, avec sa palette */
+  :root {
+    --bg: #f4f6f8;
+    --panel: #ffffff;
+    --fg: #17212b;
+    --muted: #5d6b78;
+    --line: #dfe5ea;
+    --dark-panel: #101820;
+    --ui: "DM Sans", "Segoe UI", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --bg: #0d141a; --panel: #151f28; --fg: #e8eef3; --muted: #93a3b1; --line: #24323e; --dark-panel: #0a1016; color-scheme: dark; }
+  }
+  :root[data-theme="dark"] { --bg: #0d141a; --panel: #151f28; --fg: #e8eef3; --muted: #93a3b1; --line: #24323e; --dark-panel: #0a1016; color-scheme: dark; }
+
+  body { background: var(--bg); color: var(--fg); font-family: var(--ui); font-size: 15px; line-height: 1.55; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding-block: 40px 56px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 32px; }
+  header { display: grid; gap: 8px; max-width: 70ch; }
+  h1 { margin: 0; font-size: 30px; line-height: 1.2; text-wrap: balance; }
+  header p { margin: 0; color: var(--muted); }
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 24px; display: grid; gap: 18px; min-width: 0; }
+  .card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .card-head h2 { margin: 0; font-size: 19px; }
+  .tag { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  .stage { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .stage > div { border-radius: 12px; display: grid; place-items: center; padding: 28px 12px; }
+  .stage .light { background: #f7f9fb; border: 1px solid #e6ebef; }
+  .stage .dark { background: var(--dark-panel); }
+  .stage svg { width: 96px; height: 96px; }
+  .lockup { display: flex; align-items: center; gap: 14px; padding: 16px; border-radius: 12px; background: #ffffff; border: 1px solid #e6ebef; overflow-x: auto; }
+  .lockup svg { width: 52px; height: 52px; flex: none; }
+  .word { font-size: 34px; line-height: 1; letter-spacing: -0.01em; white-space: nowrap; color: #17212b; }
+  .sizes { display: flex; align-items: end; gap: 16px; }
+  .sizes svg { display: block; }
+  .sizes span { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .sizes figure { margin: 0; display: grid; gap: 6px; justify-items: center; }
+  .swatches { display: flex; gap: 8px; flex-wrap: wrap; }
+  .sw { display: grid; gap: 4px; font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .sw i { display: block; width: 56px; height: 32px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.08); }
+  .why { margin: 0; color: var(--muted); max-width: 62ch; }
+  .why b { color: var(--fg); font-weight: 600; }
+  .next { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 20px 24px; display: grid; gap: 6px; max-width: 80ch; }
+  .next h2 { margin: 0; font-size: 17px; }
+  .next p { margin: 0; color: var(--muted); }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#119DA4"/><stop offset="1" stop-color="#0B3C5D"/></linearGradient>
+    <linearGradient id="gC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16324A"/><stop offset="1" stop-color="#0E1F2E"/></linearGradient>
+
+    <!-- A · Pulse Route : une route qui devient un battement, puis un arrêt -->
+    <symbol id="logoA" viewBox="0 0 64 64">
+      <rect width="64" height="64" rx="16" fill="url(#gA)"/>
+      <path d="M10 36H22L27.5 23L34.5 45L39.5 30L42.5 36H47" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="52" cy="36" r="4.5" fill="#FF6B5A"/>
+    </symbol>
+
+    <!-- B · Signal Pin : un repère de carte qui capte le signal des antennes -->
+    <symbol id="logoB" viewBox="0 0 64 64">
+      <path d="M32 4C19.3 4 10 13.6 10 25.6C10 41 32 60 32 60C32 60 54 41 54 25.6C54 13.6 44.7 4 32 4Z" fill="#0F6E56"/>
+      <path d="M19 29A13 13 0 0 1 45 29" fill="none" stroke="#F2A541" stroke-width="3.4" stroke-linecap="round"/>
+      <path d="M24.5 29A7.5 7.5 0 0 1 39.5 29" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/>
+      <circle cx="32" cy="29.5" r="3.6" fill="#fff"/>
+    </symbol>
+
+    <!-- C · Flow Lines : trois flux de circulation, le dernier porte l'impulsion -->
+    <symbol id="logoC" viewBox="0 0 64 64">
+      <rect width="64" height="64" rx="18" fill="url(#gC)"/>
+      <path d="M12 21C20 15 27 27 35 21S48 15 52 21" fill="none" stroke="#2EC4B6" stroke-width="4.5" stroke-linecap="round"/>
+      <path d="M12 33C20 27 27 39 35 33S48 27 52 33" fill="none" stroke="#3FA9F5" stroke-width="4.5" stroke-linecap="round"/>
+      <path d="M12 45C18 40 24 50 32 45" fill="none" stroke="#FF7A59" stroke-width="4.5" stroke-linecap="round"/>
+      <circle cx="42" cy="45" r="4.5" fill="#FF7A59"/>
+      <circle cx="42" cy="45" r="8.5" fill="none" stroke="#FF7A59" stroke-opacity="0.45" stroke-width="2"/>
+    </symbol>
+
+    <!-- D · Monogramme réseau : un F dessiné comme un plan de lignes de bus avec ses arrêts -->
+    <symbol id="logoD" viewBox="0 0 64 64">
+      <rect width="64" height="64" rx="16" fill="#1B1F2A"/>
+      <path d="M22 50V16H42M22 32H36" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="45" cy="16" r="5" fill="#F5B700" stroke="#1B1F2A" stroke-width="2.5"/>
+      <circle cx="39" cy="32" r="5" fill="#13A06F" stroke="#1B1F2A" stroke-width="2.5"/>
+      <circle cx="22" cy="50" r="5" fill="#fff" stroke="#1B1F2A" stroke-width="2.5"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="wrap">
+  <header>
+    <h1>Logo FlowPulse : quatre pistes</h1>
+    <p>Chaque piste montre le symbole sur fond clair et sombre, le logo complet, les petites tailles (onglet du navigateur, application) et la palette qu'elle impose à l'interface. Choisissez-en une, ou combinez deux idées.</p>
+  </header>
+
+  <div class="grid">
+    <article class="card">
+      <div class="card-head"><h2>A · Pulse Route</h2><span class="tag">Institutionnel, rassurant</span></div>
+      <div class="stage"><div class="light"><svg role="img" aria-label="Symbole Pulse Route"><use href="#logoA"/></svg></div><div class="dark"><svg role="img" aria-label="Symbole Pulse Route sur fond sombre"><use href="#logoA"/></svg></div></div>
+      <div class="lockup"><svg aria-hidden="true"><use href="#logoA"/></svg><span class="word" style="font-family:'Sora',sans-serif"><b style="font-weight:700">Flow</b><span style="font-weight:500;color:#119DA4">Pulse</span></span></div>
+      <div class="sizes"><figure><svg width="16" height="16" aria-hidden="true"><use href="#logoA"/></svg><span>16 px</span></figure><figure><svg width="32" height="32" aria-hidden="true"><use href="#logoA"/></svg><span>32 px</span></figure><figure><svg width="64" height="64" aria-hidden="true"><use href="#logoA"/></svg><span>64 px</span></figure></div>
+      <div class="swatches"><span class="sw"><i style="background:#0B3C5D"></i>#0B3C5D</span><span class="sw"><i style="background:#119DA4"></i>#119DA4</span><span class="sw"><i style="background:#FF6B5A"></i>#FF6B5A</span><span class="sw"><i style="background:#F4F6F8"></i>#F4F6F8</span></div>
+      <p class="why"><b>Idée :</b> le trajet se transforme en battement de cœur, la ville « vit » et FlowPulse prend son pouls. Le point corail marque l'arrêt de bus. Lisible et sérieux face à une municipalité ou un ministère.</p>
+    </article>
+
+    <article class="card">
+      <div class="card-head"><h2>B · Signal Pin</h2><span class="tag">Local, chaleureux</span></div>
+      <div class="stage"><div class="light"><svg role="img" aria-label="Symbole Signal Pin"><use href="#logoB"/></svg></div><div class="dark"><svg role="img" aria-label="Symbole Signal Pin sur fond sombre"><use href="#logoB"/></svg></div></div>
+      <div class="lockup"><svg aria-hidden="true"><use href="#logoB"/></svg><span class="word" style="font-family:'Manrope',sans-serif"><b style="font-weight:800;color:#0F6E56">Flow</b><span style="font-weight:500">Pulse</span></span></div>
+      <div class="sizes"><figure><svg width="16" height="16" aria-hidden="true"><use href="#logoB"/></svg><span>16 px</span></figure><figure><svg width="32" height="32" aria-hidden="true"><use href="#logoB"/></svg><span>32 px</span></figure><figure><svg width="64" height="64" aria-hidden="true"><use href="#logoB"/></svg><span>64 px</span></figure></div>
+      <div class="swatches"><span class="sw"><i style="background:#0F6E56"></i>#0F6E56</span><span class="sw"><i style="background:#F2A541"></i>#F2A541</span><span class="sw"><i style="background:#1E2A26"></i>#1E2A26</span><span class="sw"><i style="background:#F6F5EF"></i>#F6F5EF</span></div>
+      <p class="why"><b>Idée :</b> un repère de carte qui reçoit le signal des antennes. Il dit directement « données mobiles + lieu ». Le vert forêt et l'ambre évoquent l'Afrique sans tomber dans le folklore.</p>
+    </article>
+
+    <article class="card">
+      <div class="card-head"><h2>C · Flow Lines</h2><span class="tag">Tech, salle de contrôle</span></div>
+      <div class="stage"><div class="light"><svg role="img" aria-label="Symbole Flow Lines"><use href="#logoC"/></svg></div><div class="dark"><svg role="img" aria-label="Symbole Flow Lines sur fond sombre"><use href="#logoC"/></svg></div></div>
+      <div class="lockup"><svg aria-hidden="true"><use href="#logoC"/></svg><span class="word" style="font-family:'Urbanist',sans-serif"><b style="font-weight:800;color:#16324A">Flow</b><span style="font-weight:500;color:#FF7A59">Pulse</span></span></div>
+      <div class="sizes"><figure><svg width="16" height="16" aria-hidden="true"><use href="#logoC"/></svg><span>16 px</span></figure><figure><svg width="32" height="32" aria-hidden="true"><use href="#logoC"/></svg><span>32 px</span></figure><figure><svg width="64" height="64" aria-hidden="true"><use href="#logoC"/></svg><span>64 px</span></figure></div>
+      <div class="swatches"><span class="sw"><i style="background:#16324A"></i>#16324A</span><span class="sw"><i style="background:#2EC4B6"></i>#2EC4B6</span><span class="sw"><i style="background:#3FA9F5"></i>#3FA9F5</span><span class="sw"><i style="background:#FF7A59"></i>#FF7A59</span></div>
+      <p class="why"><b>Idée :</b> trois flux de circulation ; le dernier ralentit et émet une impulsion, c'est l'alerte anticipée. Les couleurs reprennent la carte de chaleur (fluide → tendu). Idéal pour un tableau de bord sombre.</p>
+    </article>
+
+    <article class="card">
+      <div class="card-head"><h2>D · Monogramme réseau</h2><span class="tag">Transport, graphique</span></div>
+      <div class="stage"><div class="light"><svg role="img" aria-label="Symbole monogramme réseau"><use href="#logoD"/></svg></div><div class="dark"><svg role="img" aria-label="Symbole monogramme réseau sur fond sombre"><use href="#logoD"/></svg></div></div>
+      <div class="lockup"><svg aria-hidden="true"><use href="#logoD"/></svg><span class="word" style="font-family:'Lexend',sans-serif"><b style="font-weight:700">Flow</b><span style="font-weight:400;color:#13A06F">Pulse</span></span></div>
+      <div class="sizes"><figure><svg width="16" height="16" aria-hidden="true"><use href="#logoD"/></svg><span>16 px</span></figure><figure><svg width="32" height="32" aria-hidden="true"><use href="#logoD"/></svg><span>32 px</span></figure><figure><svg width="64" height="64" aria-hidden="true"><use href="#logoD"/></svg><span>64 px</span></figure></div>
+      <div class="swatches"><span class="sw"><i style="background:#1B1F2A"></i>#1B1F2A</span><span class="sw"><i style="background:#13A06F"></i>#13A06F</span><span class="sw"><i style="background:#F5B700"></i>#F5B700</span><span class="sw"><i style="background:#FFFFFF"></i>#FFFFFF</span></div>
+      <p class="why"><b>Idée :</b> la lettre F tracée comme un plan de lignes de bus, avec ses arrêts. Très « réseau de transport », reconnaissable même en 16 px. Le vert et le jaune font un clin d'œil discret aux couleurs nationales.</p>
+    </article>
+  </div>
+
+  <section class="next">
+    <h2>Après le choix</h2>
+    <p>Le logo retenu fixe la palette, la police des titres et le style des icônes. Viennent ensuite la charte complète (couleurs d'état, carte de chaleur accessible aux daltoniens, thème clair et sombre), puis les maquettes de tous les écrans.</p>
+  </section>
+</div>

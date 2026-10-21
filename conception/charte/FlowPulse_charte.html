@@ -1,0 +1,791 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>[hidden]{display:none!important}body{margin:0}</style>
+</head>
+<body>
+<title>Charte FlowPulse</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  /* Mise en page : colonne de lecture 1120 px, sommaire collant à gauche sur grand écran, chaque section = une règle de la charte avec son aperçu vivant */
+  :root {
+    /* Marque (fixes, identiques dans les deux thèmes) */
+    --encre: #1B1F2A;
+    --emeraude: #13A06F;
+    --soleil: #F5B700;
+    --blanc: #FFFFFF;
+
+    /* Interface — thème clair (par défaut) */
+    --bg: #F5F7F8;
+    --surface: #FFFFFF;
+    --surface-2: #EEF2F1;
+    --border: #DDE3E1;
+    --text: #1B1F2A;
+    --text-2: #4E5866;
+    --text-3: #687282;
+    --primary: #0B7A52;
+    --primary-hover: #086443;
+    --on-primary: #FFFFFF;
+    --primary-soft: #E3F4EC;
+    --accent-soft: #FFF4CC;
+    --focus: #1C7ED6;
+    --nav-bg: #1B1F2A;
+    --nav-text: #C9D1DC;
+    --map-bg: #EEF2F1; --map-road: #FFFFFF; --map-water: #DCE7EC;
+
+    /* États de circulation (jamais sans libellé ni icône) */
+    --fluide: #1F9D55;
+    --modere: #D99800;
+    --dense: #E8590C;
+    --sature: #C92A2A;
+    --info: #1971C2;
+
+    /* Typographie */
+    --f-display: "Lexend", "Segoe UI", system-ui, sans-serif;
+    --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+    --f-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+
+    /* Formes */
+    --r-sm: 6px; --r-md: 10px; --r-lg: 14px; --r-xl: 20px; --r-pill: 999px;
+    --e1: 0 1px 2px rgba(27, 31, 42, 0.06);
+    --e2: 0 4px 16px rgba(27, 31, 42, 0.08);
+    --e3: 0 16px 48px rgba(27, 31, 42, 0.16);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #11141B; --surface: #1B1F2A; --surface-2: #242A38; --border: #313849;
+      --text: #EEF1F5; --text-2: #B3BBC8; --text-3: #8F98A8;
+      --primary: #2BC48A; --primary-hover: #4FD6A1; --on-primary: #10231B; --primary-soft: #173D30; --accent-soft: #3A3115;
+      --focus: #4DABF7; --nav-bg: #0B0E14; --nav-text: #B3BBC8; --map-bg: #1A1F29; --map-road: #2C3342; --map-water: #1C2633;
+      --fluide: #37B26C; --modere: #F2B21C; --dense: #FF7A33; --sature: #F05252; --info: #4DABF7;
+      --e1: 0 1px 2px rgba(0, 0, 0, 0.3); --e2: 0 4px 16px rgba(0, 0, 0, 0.35); --e3: 0 16px 48px rgba(0, 0, 0, 0.5);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #11141B; --surface: #1B1F2A; --surface-2: #242A38; --border: #313849;
+    --text: #EEF1F5; --text-2: #B3BBC8; --text-3: #8F98A8;
+    --primary: #2BC48A; --primary-hover: #4FD6A1; --on-primary: #10231B; --primary-soft: #173D30; --accent-soft: #3A3115;
+    --focus: #4DABF7; --nav-bg: #0B0E14; --nav-text: #B3BBC8; --map-bg: #1A1F29; --map-road: #2C3342; --map-water: #1C2633;
+    --fluide: #37B26C; --modere: #F2B21C; --dense: #FF7A33; --sature: #F05252; --info: #4DABF7;
+    --e1: 0 1px 2px rgba(0, 0, 0, 0.3); --e2: 0 4px 16px rgba(0, 0, 0, 0.35); --e3: 0 16px 48px rgba(0, 0, 0, 0.5);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: var(--f-body); font-size: 16px; line-height: 1.55; }
+  h1, h2, h3, h4 { font-family: var(--f-display); margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+  p { margin: 0; }
+  code, .mono { font-family: var(--f-mono); font-size: 0.86em; }
+  a { color: var(--primary); }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+  .page { max-width: 1240px; margin: 0 auto; padding-block: 32px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 40px; }
+  @media (max-width: 980px) { .page { grid-template-columns: minmax(0, 1fr); } .toc { display: none; } }
+  .toc { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 24px); align-self: start; display: grid; gap: 4px; font-size: 14px; }
+  .toc a { color: var(--text-2); text-decoration: none; padding: 6px 10px; border-radius: var(--r-sm); }
+  .toc a:hover { background: var(--surface-2); color: var(--text); }
+  main { display: grid; gap: 56px; min-width: 0; }
+
+  .hero { display: grid; gap: 16px; }
+  .hero-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand svg { width: 44px; height: 44px; }
+  .wordmark { font-family: var(--f-display); font-size: 26px; font-weight: 700; letter-spacing: -0.01em; }
+  .wordmark span { font-weight: 400; color: var(--primary); }
+  .hero h1 { font-size: clamp(30px, 4vw, 42px); line-height: 1.15; max-width: 22ch; }
+  .hero p { color: var(--text-2); max-width: 68ch; }
+  .meta { font-size: 13px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.06em; }
+
+  section { display: grid; gap: 20px; scroll-margin-top: 24px; }
+  .sec-head { display: grid; gap: 6px; max-width: 72ch; }
+  .sec-head h2 { font-size: 26px; }
+  .sec-head p { color: var(--text-2); }
+  .eyebrow { font-family: var(--f-display); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--primary); }
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 24px; display: grid; gap: 16px; min-width: 0; }
+  .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+  @media (max-width: 860px) { .grid-3, .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: minmax(0, 1fr); } }
+  h3 { font-size: 18px; }
+  .note { font-size: 14px; color: var(--text-2); }
+  .theme-toggle { display: inline-flex; border: 1px solid var(--border); border-radius: var(--r-pill); padding: 3px; background: var(--surface); }
+  .theme-toggle button { border: 0; background: transparent; color: var(--text-2); font: 500 13px var(--f-display); padding: 6px 14px; border-radius: var(--r-pill); cursor: pointer; }
+  .theme-toggle button[aria-pressed="true"] { background: var(--primary); color: var(--on-primary); }
+
+  /* Principes */
+  .principle { display: grid; gap: 8px; }
+  .principle .num { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; font: 600 14px var(--f-display); background: var(--primary-soft); color: var(--primary); }
+  .principle p { color: var(--text-2); font-size: 15px; }
+
+  /* Logo */
+  .logo-stage { border-radius: var(--r-md); display: grid; place-items: center; padding: 28px 16px; gap: 12px; }
+  .logo-stage.light { background: #F5F7F8; border: 1px solid #DDE3E1; }
+  .logo-stage.ink { background: #1B1F2A; }
+  .logo-stage.green { background: #0B7A52; }
+  .lockup { display: flex; align-items: center; gap: 12px; }
+  .lockup svg { width: 48px; height: 48px; }
+  .lockup .w { font-family: var(--f-display); font-size: 30px; font-weight: 700; letter-spacing: -0.01em; }
+  .lockup .w span { font-weight: 400; }
+  .stage-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .dont { display: grid; gap: 8px; justify-items: center; text-align: center; font-size: 13px; color: var(--text-2); }
+  .dont .box { width: 100%; border-radius: var(--r-md); background: var(--surface-2); display: grid; place-items: center; padding: 20px 8px; position: relative; }
+  .dont .x { color: var(--sature); font-weight: 700; }
+  .clear { position: relative; padding: 24px; border: 1.5px dashed var(--text-3); border-radius: var(--r-md); display: inline-grid; place-items: center; }
+
+  /* Couleurs */
+  .swatch { display: grid; gap: 8px; min-width: 0; }
+  .chip { height: 72px; border-radius: var(--r-md); border: 1px solid rgba(0, 0, 0, 0.06); display: flex; align-items: end; padding: 8px 10px; font: 500 12px var(--f-mono); }
+  .swatch b { font-family: var(--f-display); font-weight: 600; font-size: 15px; }
+  .swatch span { font-size: 13px; color: var(--text-2); }
+  .token-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .token-table th, .token-table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  .token-table th { font: 600 12px var(--f-display); text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-3); }
+  .dot { display: inline-block; width: 18px; height: 18px; border-radius: 5px; border: 1px solid rgba(0, 0, 0, 0.1); vertical-align: middle; margin-right: 8px; }
+  .scroll { overflow-x: auto; }
+  .ramp { display: grid; grid-template-columns: repeat(6, 1fr); gap: 3px; height: 44px; }
+  .ramp span { border-radius: 6px; }
+  .ramp-labels { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-2); }
+  .lines { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  /* Typographie */
+  .type-row { display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 16px; align-items: baseline; padding-block: 12px; border-bottom: 1px solid var(--border); }
+  .type-row:last-child { border-bottom: 0; }
+  .type-row .spec { font-size: 13px; color: var(--text-3); font-family: var(--f-mono); }
+  @media (max-width: 560px) { .type-row { grid-template-columns: minmax(0, 1fr); gap: 4px; } }
+
+  /* Espacements, rayons, ombres */
+  .space-row { display: flex; align-items: end; gap: 14px; flex-wrap: wrap; }
+  .space-row figure { margin: 0; display: grid; gap: 6px; justify-items: center; font-size: 12px; color: var(--text-2); font-variant-numeric: tabular-nums; }
+  .space-row i { display: block; background: var(--primary); border-radius: 3px; width: 14px; }
+  .radius-row, .elev-row { display: flex; gap: 16px; flex-wrap: wrap; }
+  .radius-row div, .elev-row div { width: 96px; height: 72px; background: var(--surface-2); border: 1px solid var(--border); display: grid; place-items: center; font-size: 12px; color: var(--text-2); font-family: var(--f-mono); }
+  .elev-row div { background: var(--surface); border-radius: var(--r-lg); border-color: transparent; }
+
+  /* Icônes */
+  .icons { display: flex; gap: 12px; flex-wrap: wrap; }
+  .icon-tile { width: 92px; display: grid; gap: 6px; justify-items: center; text-align: center; font-size: 12px; color: var(--text-2); }
+  .icon-tile div { width: 48px; height: 48px; border-radius: var(--r-md); background: var(--surface-2); display: grid; place-items: center; color: var(--text); }
+  .icon-tile svg { width: 24px; height: 24px; }
+
+  /* Composants */
+  .btn { display: inline-flex; align-items: center; gap: 8px; font: 500 15px var(--f-display); padding: 10px 18px; border-radius: var(--r-md); border: 1px solid transparent; cursor: pointer; transition: background 150ms ease-out, border-color 150ms ease-out; }
+  .btn-primary { background: var(--primary); color: var(--on-primary); }
+  .btn-primary:hover { background: var(--primary-hover); }
+  .btn-secondary { background: var(--surface); color: var(--text); border-color: var(--border); }
+  .btn-secondary:hover { background: var(--surface-2); }
+  .btn-ghost { background: transparent; color: var(--primary); }
+  .btn-ghost:hover { background: var(--primary-soft); }
+  .btn-danger { background: transparent; color: var(--sature); border-color: color-mix(in srgb, var(--sature) 40%, transparent); }
+  .btn[disabled] { opacity: 0.5; cursor: not-allowed; }
+  .btn svg { width: 18px; height: 18px; }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .field { display: grid; gap: 6px; font-size: 14px; }
+  .field label { font-weight: 700; }
+  .field input, .field select { font: 16px var(--f-body); padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--r-md); background: var(--surface); color: var(--text); }
+  .field .hint { color: var(--text-3); font-size: 13px; }
+  .field.error input { border-color: var(--sature); }
+  .field.error .hint { color: var(--sature); }
+
+  .badge { display: inline-flex; align-items: center; gap: 6px; font: 600 12px var(--f-display); padding: 4px 10px; border-radius: var(--r-pill); }
+  .badge svg { width: 14px; height: 14px; }
+  .b-fluide { background: color-mix(in srgb, var(--fluide) 14%, transparent); color: var(--fluide); }
+  .b-modere { background: color-mix(in srgb, var(--modere) 18%, transparent); color: color-mix(in srgb, var(--modere) 75%, var(--text)); }
+  .b-dense { background: color-mix(in srgb, var(--dense) 15%, transparent); color: var(--dense); }
+  .b-sature { background: color-mix(in srgb, var(--sature) 14%, transparent); color: var(--sature); }
+  .b-info { background: color-mix(in srgb, var(--info) 14%, transparent); color: var(--info); }
+  .b-neutral { background: var(--surface-2); color: var(--text-2); }
+
+  .line-badge { display: inline-flex; align-items: center; gap: 8px; font: 600 14px var(--f-display); }
+  .line-badge i { font-style: normal; display: inline-grid; place-items: center; min-width: 30px; height: 30px; padding: 0 6px; border-radius: var(--r-pill); color: #fff; font-size: 13px; }
+
+  .kpi { display: grid; gap: 6px; }
+  .kpi .label { font-size: 13px; color: var(--text-2); }
+  .kpi .value { font: 600 32px var(--f-display); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+  .kpi .value small { font-size: 15px; font-weight: 500; color: var(--text-2); margin-left: 4px; }
+  .kpi .trend { font-size: 13px; display: flex; gap: 6px; align-items: center; }
+  .kpi svg.spark { width: 100%; height: 36px; }
+
+  .alert-card { display: grid; grid-template-columns: 4px minmax(0, 1fr); border-radius: var(--r-lg); background: var(--surface); border: 1px solid var(--border); overflow: hidden; box-shadow: var(--e1); }
+  .alert-card .stripe { background: var(--sature); }
+  .alert-card .body { padding: 16px 18px; display: grid; gap: 10px; }
+  .alert-card .top { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .alert-card h4 { font-size: 16px; }
+  .alert-card .facts { display: flex; gap: 18px; flex-wrap: wrap; font-size: 14px; color: var(--text-2); }
+  .alert-card .facts b { color: var(--text); font-variant-numeric: tabular-nums; }
+
+  .reco { display: grid; gap: 14px; }
+  .verdict { display: flex; gap: 10px; align-items: start; padding: 12px 14px; border-radius: var(--r-md); background: color-mix(in srgb, var(--fluide) 10%, transparent); font-size: 14px; }
+  .verdict svg { width: 20px; height: 20px; color: var(--fluide); flex: none; margin-top: 1px; }
+  .cite { display: inline-flex; align-items: center; gap: 6px; font: 500 12.5px var(--f-mono); padding: 4px 10px; border-radius: var(--r-pill); border: 1px solid var(--border); background: var(--surface-2); color: var(--text-2); text-decoration: none; }
+  .cite:hover { border-color: var(--primary); color: var(--primary); }
+  .trace { font-size: 13px; color: var(--text-3); display: flex; gap: 8px; align-items: center; }
+
+  .toast { display: flex; gap: 12px; align-items: center; padding: 12px 16px; border-radius: var(--r-md); background: var(--encre); color: #fff; box-shadow: var(--e3); font-size: 14px; max-width: 420px; }
+  .toast svg { width: 18px; height: 18px; color: #2BC48A; flex: none; }
+
+  .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); overflow-x: auto; }
+  .tabs span { padding: 10px 14px; font: 500 14px var(--f-display); color: var(--text-2); border-bottom: 2px solid transparent; white-space: nowrap; }
+  .tabs span.on { color: var(--text); border-color: var(--primary); }
+
+  .data-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .data-table th, .data-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+  .data-table th { font: 600 12px var(--f-display); text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-3); }
+  .data-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+  /* Gabarits */
+  .mock { border-radius: var(--r-lg); border: 1px solid var(--border); overflow: hidden; background: var(--surface); box-shadow: var(--e2); }
+  .mock-bar { display: flex; gap: 6px; padding: 10px 12px; background: var(--surface-2); border-bottom: 1px solid var(--border); }
+  .mock-bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--border); }
+  .landing { display: grid; }
+  .l-nav { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; gap: 12px; flex-wrap: wrap; }
+  .l-nav .links { display: flex; gap: 18px; font-size: 14px; color: var(--text-2); flex-wrap: wrap; }
+  .l-hero { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 24px; padding: 32px 24px 40px; align-items: center; }
+  @media (max-width: 760px) { .l-hero { grid-template-columns: minmax(0, 1fr); } }
+  .l-hero h3 { font-size: clamp(24px, 3vw, 34px); line-height: 1.15; }
+  .l-hero p { color: var(--text-2); margin-top: 12px; }
+  .l-hero .row { margin-top: 20px; }
+  .l-map { max-width: 100%; border-radius: var(--r-xl); background: var(--map-bg); border: 1px solid var(--border); position: relative; overflow: hidden; }
+  .l-map svg { width: 100%; height: 100%; display: block; }
+  .l-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding: 0 24px 28px; }
+  @media (max-width: 760px) { .l-strip { grid-template-columns: minmax(0, 1fr); } }
+  .l-strip div { border: 1px solid var(--border); border-radius: var(--r-lg); padding: 16px; display: grid; gap: 6px; font-size: 14px; color: var(--text-2); }
+  .l-strip b { color: var(--text); font-family: var(--f-display); font-weight: 600; }
+
+  .shell { display: grid; grid-template-columns: 200px minmax(0, 1fr); min-height: 380px; }
+  @media (max-width: 760px) { .shell { grid-template-columns: minmax(0, 1fr); } .s-side { display: none; } }
+  .s-side { background: var(--nav-bg); color: var(--nav-text); padding: 16px 12px; display: grid; align-content: start; gap: 4px; font-size: 14px; }
+  .s-side .lockup { margin-bottom: 16px; padding: 0 6px; }
+  .s-side .lockup svg { width: 30px; height: 30px; }
+  .s-side .lockup .w { font-size: 18px; color: #fff; }
+  .s-side a { color: inherit; text-decoration: none; padding: 8px 10px; border-radius: var(--r-sm); display: flex; justify-content: space-between; }
+  .s-side a.on { background: rgba(255, 255, 255, 0.08); color: #fff; }
+  .s-side a .count { background: var(--sature); color: #fff; font-size: 11px; border-radius: var(--r-pill); padding: 1px 7px; }
+  .s-main { display: grid; grid-template-rows: auto auto minmax(0, 1fr); background: var(--bg); min-width: 0; }
+  .s-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 16px; background: var(--surface); border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  .s-top h4 { font-size: 16px; }
+  .s-kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; padding: 12px 16px 0; }
+  .s-kpis div { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); padding: 10px 12px; font-size: 12px; color: var(--text-2); }
+  .s-kpis b { display: block; font: 600 20px var(--f-display); color: var(--text); font-variant-numeric: tabular-nums; }
+  .s-body { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 12px; padding: 12px 16px 16px; }
+  @media (max-width: 760px) { .s-body { grid-template-columns: minmax(0, 1fr); } }
+  .s-map { border-radius: var(--r-md); overflow: hidden; background: var(--map-bg); }
+  .s-map svg { width: 100%; height: 100%; display: block; }
+  .s-list { display: grid; gap: 8px; align-content: start; }
+  .s-list div { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--sature); border-radius: var(--r-sm); padding: 8px 10px; font-size: 12.5px; color: var(--text-2); }
+  .s-list div b { display: block; color: var(--text); font-size: 13px; }
+  .s-list div.o { border-left-color: var(--dense); }
+  .s-list div.y { border-left-color: var(--modere); }
+
+  .screens { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  @media (max-width: 640px) { .screens { grid-template-columns: minmax(0, 1fr); } }
+  .screens div { border: 1px solid var(--border); border-radius: var(--r-md); padding: 12px 14px; display: grid; gap: 4px; font-size: 14px; color: var(--text-2); background: var(--surface); }
+  .screens b { font-family: var(--f-display); font-weight: 600; color: var(--text); }
+
+  .do-dont { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  @media (max-width: 640px) { .do-dont { grid-template-columns: minmax(0, 1fr); } }
+  .do-dont div { border-radius: var(--r-md); padding: 14px 16px; font-size: 15px; display: grid; gap: 8px; }
+  .do-dont .do { background: color-mix(in srgb, var(--fluide) 9%, transparent); }
+  .do-dont .no { background: color-mix(in srgb, var(--sature) 8%, transparent); }
+  .do-dont b { font-family: var(--f-display); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .do-dont .do b { color: var(--fluide); }
+  .do-dont .no b { color: var(--sature); }
+  ul.clean { margin: 0; padding-left: 18px; display: grid; gap: 6px; color: var(--text-2); }
+
+  @keyframes pulse { 0% { r: 5; opacity: 0.7; } 100% { r: 16; opacity: 0; } }
+  .pulse-ring { animation: pulse 1.8s ease-out infinite; }
+  @media (prefers-reduced-motion: reduce) { .pulse-ring { animation: none; opacity: 0; } * { transition: none !important; } }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="logo" viewBox="0 0 64 64">
+      <rect width="64" height="64" rx="16" fill="#1B1F2A"/>
+      <path d="M22 50V16H42M22 32H36" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="45" cy="16" r="5" fill="#F5B700" stroke="#1B1F2A" stroke-width="2.5"/>
+      <circle cx="39" cy="32" r="5" fill="#13A06F" stroke="#1B1F2A" stroke-width="2.5"/>
+      <circle cx="22" cy="50" r="5" fill="#fff" stroke="#1B1F2A" stroke-width="2.5"/>
+    </symbol>
+    <symbol id="logo-inv" viewBox="0 0 64 64">
+      <rect width="64" height="64" rx="16" fill="#fff"/>
+      <path d="M22 50V16H42M22 32H36" fill="none" stroke="#1B1F2A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="45" cy="16" r="5" fill="#F5B700" stroke="#fff" stroke-width="2.5"/>
+      <circle cx="39" cy="32" r="5" fill="#13A06F" stroke="#fff" stroke-width="2.5"/>
+      <circle cx="22" cy="50" r="5" fill="#1B1F2A" stroke="#fff" stroke-width="2.5"/>
+    </symbol>
+    <!-- Icônes au trait (style Lucide, trait 1.75, extrémités arrondies) -->
+    <symbol id="i-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Z"/><path d="M9 4v14M15 6v14"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 20h20L12 3Z"/><path d="M12 10v4M12 17h.01"/></symbol>
+    <symbol id="i-bus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="14" rx="3"/><path d="M4 11h16M8 21v-4M16 21v-4M8 14h.01M16 14h.01"/></symbol>
+    <symbol id="i-stop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M12 13v8M9 21h6"/></symbol>
+    <symbol id="i-antenna" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12v9M8 21h8"/><circle cx="12" cy="10" r="2"/><path d="M7.8 5.8a6 6 0 0 0 0 8.4M16.2 5.8a6 6 0 0 1 0 8.4M5 3a10 10 0 0 0 0 14M19 3a10 10 0 0 1 0 14"/></symbol>
+    <symbol id="i-scale" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M7 21h10M5 7h14M5 7l-3 7a4 4 0 0 0 6 0L5 7ZM19 7l-3 7a4 4 0 0 0 6 0l-3-7Z"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.2L4 21l1.8-5.4A8 8 0 1 1 21 12Z"/></symbol>
+    <symbol id="i-sim" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3v6L4 19a1.5 1.5 0 0 0 1.3 2h13.4a1.5 1.5 0 0 0 1.3-2L14 9V3M8 3h8M7 15h10"/></symbol>
+    <symbol id="i-trace" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h10M4 12h16M4 18h7"/><circle cx="18" cy="6" r="2"/><circle cx="15" cy="18" r="2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7l10 10M17 9v8H9"/></symbol>
+  </defs>
+</svg>
+
+<div class="page">
+  <nav class="toc" aria-label="Sommaire">
+    <a href="#principes">Principes</a>
+    <a href="#logo">Logo</a>
+    <a href="#couleurs">Couleurs</a>
+    <a href="#typographie">Typographie</a>
+    <a href="#formes">Espaces et formes</a>
+    <a href="#icones">Icônes</a>
+    <a href="#composants">Composants</a>
+    <a href="#carte">Carte</a>
+    <a href="#gabarits">Landing et application</a>
+    <a href="#mouvement">Mouvement</a>
+    <a href="#redaction">Rédaction</a>
+    <a href="#accessibilite">Accessibilité</a>
+  </nav>
+
+  <main>
+    <header class="hero">
+      <div class="hero-top">
+        <div class="brand"><svg aria-hidden="true"><use href="#logo"/></svg><span class="wordmark">Flow<span>Pulse</span></span></div>
+        <div class="theme-toggle" role="group" aria-label="Thème de l'aperçu">
+          <button type="button" id="t-auto" aria-pressed="true">Système</button>
+          <button type="button" id="t-light" aria-pressed="false">Clair</button>
+          <button type="button" id="t-dark" aria-pressed="false">Sombre</button>
+        </div>
+      </div>
+      <span class="meta">Charte graphique · version 1.0 · octobre 2026</span>
+      <h1>Une interface calme pour des décisions urgentes.</h1>
+      <p>FlowPulse aide une municipalité et un opérateur de bus à anticiper la congestion et à réaffecter la flotte. La charte sert un objectif : rendre lisible en quelques secondes ce qui demande une action, et montrer d'où vient chaque recommandation. Elle couvre la landing page et toute l'application. Le thème clair est le thème par défaut ; le thème sombre est proposé en option, notamment pour l'écran de supervision affiché en continu.</p>
+    </header>
+
+    <section id="principes">
+      <div class="sec-head"><span class="eyebrow">Fondations</span><h2>Quatre principes</h2><p>Chaque choix de la charte découle de l'un d'eux. En cas de doute sur un écran, on revient ici.</p></div>
+      <div class="grid-4">
+        <div class="panel principle"><span class="num">1</span><h3>L'urgence se voit</h3><p>Ce qui demande une action est visible au premier coup d'œil : couleur d'état, libellé et position en haut de l'écran.</p></div>
+        <div class="panel principle"><span class="num">2</span><h3>L'humain décide</h3><p>L'IA propose, la personne valide. Les boutons « Appliquer » et « Rejeter » sont toujours explicites, jamais automatiques.</p></div>
+        <div class="panel principle"><span class="num">3</span><h3>Tout se justifie</h3><p>Chaque recommandation affiche ses sources (texte, article) et un lien vers le raisonnement de l'agent.</p></div>
+        <div class="panel principle"><span class="num">4</span><h3>Lisible par tous</h3><p>Contraste AA minimum, état jamais porté par la seule couleur, police pensée pour la lisibilité, utilisable au clavier.</p></div>
+      </div>
+    </section>
+
+    <section id="logo">
+      <div class="sec-head"><span class="eyebrow">Identité</span><h2>Logo</h2><p>Le F est dessiné comme un plan de lignes de bus : deux lignes, trois arrêts. L'arrêt jaune en haut, l'arrêt vert au milieu, l'arrêt blanc au départ. Le mot « Flow » est en gras, « Pulse » en régulier, en Lexend.</p></div>
+      <div class="grid-3">
+        <div class="logo-stage light"><div class="lockup"><svg aria-hidden="true"><use href="#logo"/></svg><span class="w" style="color:#1B1F2A">Flow<span style="color:#0B7A52">Pulse</span></span></div><span class="stage-label" style="color:#687282">Principal · fond clair</span></div>
+        <div class="logo-stage ink"><div class="lockup"><svg aria-hidden="true"><use href="#logo-inv"/></svg><span class="w" style="color:#fff">Flow<span style="color:#2BC48A">Pulse</span></span></div><span class="stage-label" style="color:#9AA3B2">Inversé · fond encre</span></div>
+        <div class="logo-stage green"><div class="lockup"><svg aria-hidden="true"><use href="#logo"/></svg><span class="w" style="color:#fff">Flow<span>Pulse</span></span></div><span class="stage-label" style="color:#CFEBDD">Monochrome · fond émeraude</span></div>
+      </div>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Zone de protection et tailles</h3>
+          <div class="row"><span class="clear"><svg width="64" height="64" aria-hidden="true"><use href="#logo"/></svg></span><p class="note">Garder autour du symbole un espace libre égal au diamètre d'un arrêt × 2 (soit ¼ de la largeur du symbole). Taille minimale : 16 px pour le symbole seul, 120 px de large pour le logo complet.</p></div>
+          <div class="row"><svg width="16" height="16" aria-hidden="true"><use href="#logo"/></svg><svg width="24" height="24" aria-hidden="true"><use href="#logo"/></svg><svg width="32" height="32" aria-hidden="true"><use href="#logo"/></svg><svg width="48" height="48" aria-hidden="true"><use href="#logo"/></svg><span class="note">16 · 24 · 32 · 48 px</span></div>
+        </div>
+        <div class="panel">
+          <h3>À ne pas faire</h3>
+          <div class="grid-4">
+            <div class="dont"><div class="box"><svg width="44" height="44" style="transform:scaleX(1.5)" aria-hidden="true"><use href="#logo"/></svg></div><span><span class="x">✕</span> Déformer</span></div>
+            <div class="dont"><div class="box"><svg width="44" height="44" style="transform:rotate(-18deg)" aria-hidden="true"><use href="#logo"/></svg></div><span><span class="x">✕</span> Pivoter</span></div>
+            <div class="dont"><div class="box"><svg width="44" height="44" style="filter:hue-rotate(150deg)" aria-hidden="true"><use href="#logo"/></svg></div><span><span class="x">✕</span> Changer les couleurs</span></div>
+            <div class="dont"><div class="box" style="background:#E8682C"><svg width="44" height="44" aria-hidden="true"><use href="#logo"/></svg></div><span><span class="x">✕</span> Fond vif ou chargé</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="couleurs">
+      <div class="sec-head"><span class="eyebrow">Couleurs</span><h2>Palette</h2><p>Trois couleurs de marque, une interface neutre légèrement teintée de vert, et des couleurs d'état réservées à la circulation. Le vert de marque ne sert jamais à dire « fluide » : les états ont leur propre vert.</p></div>
+      <div class="grid-4">
+        <div class="swatch"><div class="chip" style="background:#1B1F2A;color:#fff">#1B1F2A</div><b>Encre</b><span>Textes, navigation, fond du symbole</span></div>
+        <div class="swatch"><div class="chip" style="background:#13A06F;color:#fff">#13A06F</div><b>Émeraude</b><span>Marque, illustrations, icônes actives</span></div>
+        <div class="swatch"><div class="chip" style="background:#F5B700;color:#1B1F2A">#F5B700</div><b>Soleil</b><span>Accent ponctuel : nouveauté, mise en avant</span></div>
+        <div class="swatch"><div class="chip" style="background:#FFFFFF;color:#1B1F2A">#FFFFFF</div><b>Blanc</b><span>Surfaces, symbole inversé</span></div>
+      </div>
+
+      <div class="panel">
+        <h3>Couleurs d'interface (jetons)</h3>
+        <p class="note">Les composants utilisent uniquement ces jetons ; le thème sombre redéfinit les mêmes noms. Basculez le thème en haut de page pour voir les deux.</p>
+        <div class="scroll">
+          <table class="token-table">
+            <thead><tr><th>Jeton</th><th>Clair</th><th>Sombre</th><th>Usage</th></tr></thead>
+            <tbody>
+              <tr><td><code>--bg</code></td><td><span class="dot" style="background:#F5F7F8"></span>#F5F7F8</td><td><span class="dot" style="background:#11141B"></span>#11141B</td><td>Fond de page</td></tr>
+              <tr><td><code>--surface</code></td><td><span class="dot" style="background:#FFFFFF"></span>#FFFFFF</td><td><span class="dot" style="background:#1B1F2A"></span>#1B1F2A</td><td>Cartes, panneaux, champs</td></tr>
+              <tr><td><code>--surface-2</code></td><td><span class="dot" style="background:#EEF2F1"></span>#EEF2F1</td><td><span class="dot" style="background:#242A38"></span>#242A38</td><td>Zones secondaires, survol</td></tr>
+              <tr><td><code>--border</code></td><td><span class="dot" style="background:#DDE3E1"></span>#DDE3E1</td><td><span class="dot" style="background:#313849"></span>#313849</td><td>Bordures, séparateurs</td></tr>
+              <tr><td><code>--text</code></td><td><span class="dot" style="background:#1B1F2A"></span>#1B1F2A</td><td><span class="dot" style="background:#EEF1F5"></span>#EEF1F5</td><td>Texte principal</td></tr>
+              <tr><td><code>--text-2</code></td><td><span class="dot" style="background:#4E5866"></span>#4E5866</td><td><span class="dot" style="background:#B3BBC8"></span>#B3BBC8</td><td>Texte secondaire</td></tr>
+              <tr><td><code>--primary</code></td><td><span class="dot" style="background:#0B7A52"></span>#0B7A52</td><td><span class="dot" style="background:#2BC48A"></span>#2BC48A</td><td>Boutons, liens, onglet actif (contraste AA garanti)</td></tr>
+              <tr><td><code>--primary-soft</code></td><td><span class="dot" style="background:#E3F4EC"></span>#E3F4EC</td><td><span class="dot" style="background:#173D30"></span>#173D30</td><td>Fond de sélection, survol des liens</td></tr>
+              <tr><td><code>--focus</code></td><td><span class="dot" style="background:#1C7ED6"></span>#1C7ED6</td><td><span class="dot" style="background:#4DABF7"></span>#4DABF7</td><td>Contour de focus clavier</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <h3>États de circulation</h3>
+          <p class="note">Toujours accompagnés d'un libellé et d'une icône ; jamais la couleur seule.</p>
+          <div class="row">
+            <span class="badge b-fluide"><svg aria-hidden="true"><use href="#i-check"/></svg>Fluide</span>
+            <span class="badge b-modere"><svg aria-hidden="true"><use href="#i-alert"/></svg>Modéré</span>
+            <span class="badge b-dense"><svg aria-hidden="true"><use href="#i-alert"/></svg>Dense</span>
+            <span class="badge b-sature"><svg aria-hidden="true"><use href="#i-alert"/></svg>Saturé</span>
+            <span class="badge b-info">Information</span>
+          </div>
+          <div class="scroll">
+            <table class="token-table"><tbody>
+              <tr><td><code>--fluide</code></td><td><span class="dot" style="background:#1F9D55"></span>#1F9D55</td><td>Vitesse ou densité normale</td></tr>
+              <tr><td><code>--modere</code></td><td><span class="dot" style="background:#D99800"></span>#D99800</td><td>À surveiller</td></tr>
+              <tr><td><code>--dense</code></td><td><span class="dot" style="background:#E8590C"></span>#E8590C</td><td>Congestion probable sous 30 à 60 min</td></tr>
+              <tr><td><code>--sature</code></td><td><span class="dot" style="background:#C92A2A"></span>#C92A2A</td><td>Saturation, action requise</td></tr>
+            </tbody></table>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>Carte de chaleur (densité de population)</h3>
+          <p class="note">Six classes en aplats, du jaune pâle au prune, sans dégradé : lisible pour les daltonismes les plus courants (pas d'opposition rouge/vert) et monotone en luminosité.</p>
+          <div class="ramp" aria-hidden="true"><span style="background:#FBF0B8"></span><span style="background:#FAD46A"></span><span style="background:#F5A23A"></span><span style="background:#E8682C"></span><span style="background:#C2264B"></span><span style="background:#6A1B5F"></span></div>
+          <div class="ramp-labels"><span>Faible</span><span>Densité (appareils actifs / km²)</span><span>Forte</span></div>
+          <h3>Lignes de bus</h3>
+          <div class="lines">
+            <span class="line-badge"><i style="background:#13A06F">1</i></span>
+            <span class="line-badge"><i style="background:#1C7ED6">2</i></span>
+            <span class="line-badge"><i style="background:#D6336C">3</i></span>
+            <span class="line-badge"><i style="background:#7048E8">4</i></span>
+            <span class="line-badge"><i style="background:#0C8599">5</i></span>
+            <span class="line-badge"><i style="background:#E8590C">6</i></span>
+            <span class="line-badge"><i style="background:#5C940D">7</i></span>
+            <span class="line-badge"><i style="background:#495057">8</i></span>
+          </div>
+          <p class="note">Huit couleurs distinctes pour les lignes, comme sur un plan de réseau. Le numéro reste toujours écrit dans la pastille.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="typographie">
+      <div class="sec-head"><span class="eyebrow">Typographie</span><h2>Trois polices, une échelle</h2><p><b>Lexend</b> pour les titres et les chiffres (conçue pour la lisibilité, c'est aussi la police du logo). <b>Atkinson Hyperlegible</b> pour le texte courant (créée pour les personnes malvoyantes). <b>IBM Plex Mono</b> pour les identifiants et références juridiques.</p></div>
+      <div class="panel">
+        <div class="type-row"><span class="spec">Display · 48/56 · 600</span><span style="font:600 clamp(32px,5vw,48px)/1.15 var(--f-display);letter-spacing:-0.02em">Anticiper la congestion</span></div>
+        <div class="type-row"><span class="spec">Titre 1 · 32/40 · 600</span><span style="font:600 32px/1.25 var(--f-display)">Tableau de bord</span></div>
+        <div class="type-row"><span class="spec">Titre 2 · 24/32 · 600</span><span style="font:600 24px/1.3 var(--f-display)">Alertes actives</span></div>
+        <div class="type-row"><span class="spec">Titre 3 · 18/26 · 600</span><span style="font:600 18px/1.4 var(--f-display)">Recommandation pour la ligne 3</span></div>
+        <div class="type-row"><span class="spec">Corps · 16/24 · 400</span><span>Forte tension prévue à l'arrêt Mokolo entre 17 h 30 et 18 h 15 : environ 420 personnes en attente pour 2 bus prévus.</span></div>
+        <div class="type-row"><span class="spec">Petit · 14/20 · 400</span><span style="font-size:14px;color:var(--text-2)">Mise à jour il y a 3 min · source : flux antennes, agrégés par zone</span></div>
+        <div class="type-row"><span class="spec">Étiquette · 12/16 · 600 · +6 %</span><span style="font:600 12px var(--f-display);letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">Niveau de congestion</span></div>
+        <div class="type-row"><span class="spec">Chiffre · 32 · tabulaire</span><span style="font:600 32px var(--f-display);font-variant-numeric:tabular-nums">1 284 <small style="font-size:15px;color:var(--text-2);font-weight:500">pers./km²</small></span></div>
+        <div class="type-row"><span class="spec">Référence · Plex Mono 14</span><span class="mono" style="font-size:14px">Loi n° 2024/017 · art. XX · CMR-DP-001</span></div>
+      </div>
+    </section>
+
+    <section id="formes">
+      <div class="sec-head"><span class="eyebrow">Espaces et formes</span><h2>Grille de 4 px, coins doux, ombres légères</h2><p>Les espacements sont des multiples de 4. Les coins sont arrondis comme les traits du logo. Les ombres restent discrètes : elles séparent un élément flottant (menu, fenêtre), pas chaque carte.</p></div>
+      <div class="grid-3">
+        <div class="panel"><h3>Espacements</h3><div class="space-row"><figure><i style="height:4px"></i>4</figure><figure><i style="height:8px"></i>8</figure><figure><i style="height:12px"></i>12</figure><figure><i style="height:16px"></i>16</figure><figure><i style="height:24px"></i>24</figure><figure><i style="height:32px"></i>32</figure><figure><i style="height:48px"></i>48</figure><figure><i style="height:64px"></i>64</figure></div></div>
+        <div class="panel"><h3>Rayons</h3><div class="radius-row"><div style="border-radius:6px">6 · badge</div><div style="border-radius:10px">10 · bouton</div><div style="border-radius:14px">14 · carte</div><div style="border-radius:20px">20 · landing</div></div></div>
+        <div class="panel"><h3>Élévations</h3><div class="elev-row"><div style="box-shadow:var(--e1)">e1 · carte</div><div style="box-shadow:var(--e2)">e2 · menu</div><div style="box-shadow:var(--e3)">e3 · fenêtre</div></div></div>
+      </div>
+    </section>
+
+    <section id="icones">
+      <div class="sec-head"><span class="eyebrow">Icônes</span><h2>Icônes au trait</h2><p>Bibliothèque <b>Lucide</b> : trait de 1,75 px, extrémités arrondies, taille 20 ou 24 px. Une icône accompagne un libellé ; seule, elle porte une infobulle et un nom accessible.</p></div>
+      <div class="panel"><div class="icons">
+        <div class="icon-tile"><div><svg aria-hidden="true"><use href="#i-map"/></svg></div>Carte</div>
+        <div class="icon-tile"><div><svg aria-hidden="true"><use href="#i-alert"/></svg></div>Alerte</div>
+        <div class="icon-tile"><div><svg aria-hidden="true"><use href="#i-bus"/></svg></div>Flotte</div>
+        <div class="icon-tile"><div><svg aria-hidden="true"><use href="#i-stop"/></svg></div>Arrêt</div>
+        <div class="icon-tile"><div><svg aria-hidden="true"><use href="#i-antenna"/></svg></div>Antenne</div>
+        <div class="icon-tile"><div><svg aria-hidden="true"><use href="#i-sim"/></svg></div>Simulation</div>
+        <div class="icon-tile"><div><svg aria-hidden="true"><use href="#i-scale"/></svg></div>Conformité</div>
+        <div class="icon-tile"><div><svg aria-hidden="true"><use href="#i-chat"/></svg></div>Superviseur</div>
+        <div class="icon-tile"><div><svg aria-hidden="true"><use href="#i-trace"/></svg></div>Raisonnement</div>
+      </div></div>
+    </section>
+
+    <section id="composants">
+      <div class="sec-head"><span class="eyebrow">Composants</span><h2>Composants de l'application</h2><p>Les briques communes à tous les écrans. Chaque composant existe dans les deux thèmes et a un état de focus visible.</p></div>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Boutons</h3>
+          <div class="row">
+            <button class="btn btn-primary" type="button"><svg aria-hidden="true"><use href="#i-check"/></svg>Appliquer la recommandation</button>
+            <button class="btn btn-secondary" type="button">Transmettre</button>
+          </div>
+          <div class="row">
+            <button class="btn btn-ghost" type="button">Voir le raisonnement</button>
+            <button class="btn btn-danger" type="button">Rejeter</button>
+            <button class="btn btn-primary" type="button" disabled>Indisponible</button>
+          </div>
+          <p class="note">Un seul bouton principal par zone. Le libellé dit ce qui va se passer.</p>
+        </div>
+        <div class="panel">
+          <h3>Champs</h3>
+          <div class="field"><label for="f1">Zone</label><select id="f1"><option>Mokolo</option><option>Poste centrale</option><option>Mvog-Mbi</option></select></div>
+          <div class="field error"><label for="f2">Heure de fin</label><input id="f2" value="11:00"><span class="hint">L'heure de fin doit être après l'heure de début (12:00).</span></div>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="panel kpi">
+          <span class="label">Congestion globale</span>
+          <span class="value">62<small>%</small></span>
+          <span class="trend" style="color:var(--dense)"><svg width="14" height="14" aria-hidden="true"><use href="#i-up"/></svg>+8 pts depuis 7 h</span>
+          <svg class="spark" viewBox="0 0 120 36" aria-hidden="true"><path d="M0 30L15 28L30 26L45 27L60 20L75 18L90 12L105 10L120 6" fill="none" stroke="var(--dense)" stroke-width="2"/><circle cx="120" cy="6" r="3" fill="var(--dense)"/></svg>
+        </div>
+        <div class="panel kpi">
+          <span class="label">Alertes actives</span>
+          <span class="value">4</span>
+          <span class="trend" style="color:var(--text-2)">dont 1 saturée</span>
+          <svg class="spark" viewBox="0 0 120 36" aria-hidden="true"><path d="M0 28L20 28L40 22L60 24L80 16L100 18L120 14" fill="none" stroke="var(--text-3)" stroke-width="2"/><circle cx="120" cy="14" r="3" fill="var(--text-3)"/></svg>
+        </div>
+        <div class="panel kpi">
+          <span class="label">Attente moyenne aux arrêts</span>
+          <span class="value">14<small>min</small></span>
+          <span class="trend" style="color:var(--fluide)"><svg width="14" height="14" aria-hidden="true"><use href="#i-down"/></svg>−3 min après réaffectation</span>
+          <svg class="spark" viewBox="0 0 120 36" aria-hidden="true"><path d="M0 8L20 10L40 9L60 14L80 20L100 24L120 26" fill="none" stroke="var(--fluide)" stroke-width="2"/><circle cx="120" cy="26" r="3" fill="var(--fluide)"/></svg>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="alert-card">
+          <div class="stripe"></div>
+          <div class="body">
+            <div class="top"><h4>Pic de foule prévu · Mokolo</h4><span class="badge b-sature"><svg aria-hidden="true"><use href="#i-alert"/></svg>Saturé</span></div>
+            <div class="facts"><span>Heure estimée <b>17 h 45</b></span><span>En attente <b>≈ 420</b></span><span>Axes <b>Bd du 20 Mai</b></span></div>
+            <div class="row"><button class="btn btn-secondary" type="button">Acquitter</button><button class="btn btn-ghost" type="button">Plan de contingence</button></div>
+          </div>
+        </div>
+        <div class="panel reco">
+          <div class="row" style="justify-content:space-between"><h3>Déplacer 2 bus vers la ligne 3</h3><span class="line-badge"><i style="background:#D6336C">3</i></span></div>
+          <div class="verdict"><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>Conforme sous réserve</b> : la réaffectation relève de l'exploitant ; la Communauté urbaine doit être informée.</span></div>
+          <div class="row"><a class="cite" href="#composants">Code des CTD · art. XX</a><a class="cite" href="#composants">Loi 2024/017 · art. XX</a></div>
+          <div class="row"><button class="btn btn-primary" type="button">Appliquer</button><button class="btn btn-danger" type="button">Rejeter</button></div>
+          <span class="trace"><svg width="16" height="16" aria-hidden="true"><use href="#i-trace"/></svg>Optimizer → Policy · 4 étapes · 2,1 s</span>
+        </div>
+      </div>
+      <p class="note">Les articles cités ci-dessus illustrent le format ; les références réelles viendront de la base de connaissances.</p>
+
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Onglets et tableau</h3>
+          <div class="tabs"><span class="on">Arrêts en tension</span><span>Interventions</span><span>Historique</span></div>
+          <div class="scroll"><table class="data-table">
+            <thead><tr><th>Arrêt</th><th>Ligne</th><th>État</th><th style="text-align:right">En attente</th></tr></thead>
+            <tbody>
+              <tr><td>Mokolo</td><td><span class="line-badge"><i style="background:#D6336C">3</i></span></td><td><span class="badge b-sature">Saturé</span></td><td class="num">420</td></tr>
+              <tr><td>Poste centrale</td><td><span class="line-badge"><i style="background:#1C7ED6">2</i></span></td><td><span class="badge b-dense">Dense</span></td><td class="num">265</td></tr>
+              <tr><td>Mvog-Mbi</td><td><span class="line-badge"><i style="background:#13A06F">1</i></span></td><td><span class="badge b-modere">Modéré</span></td><td class="num">140</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+        <div class="panel">
+          <h3>Notification</h3>
+          <div class="toast" role="status"><svg aria-hidden="true"><use href="#i-check"/></svg>Recommandation appliquée : 2 bus en route vers la ligne 3.</div>
+          <p class="note">Apparaît en bas à droite, disparaît après 5 s, reste tant que la souris la survole. Une alerte saturée ajoute un son court, désactivable.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="carte">
+      <div class="sec-head"><span class="eyebrow">Carte</span><h2>Style de carte</h2><p>Fond de carte désaturé (gris vert très clair, sombre en thème sombre) pour que seules les données ressortent. La densité s'affiche en cellules hexagonales en aplats, six classes, sans dégradé. Ordre des calques, du bas vers le haut : fond, cellules de densité, axes colorés par état, lignes de bus, arrêts, alertes.</p></div>
+      <div class="panel">
+        <svg class="hexmap" data-seed="2" data-hot="0.32,0.36,1;0.7,0.62,0.7" data-line="1" data-pins="1" viewBox="0 0 800 300" role="img" aria-label="Exemple de carte : densité en cellules hexagonales, ligne de bus et alertes" style="width:100%;height:auto;border-radius:10px;display:block"></svg>
+        <div class="row">
+          <span class="badge b-sature">Axe saturé</span><span class="badge b-dense">Axe dense</span><span class="badge b-fluide">Axe fluide</span><span class="line-badge"><i style="background:#D6336C">3</i>Ligne de bus et arrêts</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="gabarits">
+      <div class="sec-head"><span class="eyebrow">Gabarits</span><h2>De la landing page à l'application</h2><p>Même logo, mêmes jetons, même rythme. La landing est plus aérée (rayons de 20 px, grands titres) ; l'application est plus dense et orientée tâche.</p></div>
+
+      <div class="mock">
+        <div class="mock-bar"><i></i><i></i><i></i></div>
+        <div class="landing">
+          <div class="l-nav">
+            <div class="lockup"><svg style="width:32px;height:32px" aria-hidden="true"><use href="#logo"/></svg><span class="w" style="font-size:20px">Flow<span style="color:var(--primary)">Pulse</span></span></div>
+            <div class="links"><span>Fonctionnement</span><span>Pour qui</span><span>Conformité</span><span>Équipe</span></div>
+            <button class="btn btn-primary" type="button">Se connecter</button>
+          </div>
+          <div class="l-hero">
+            <div>
+              <span class="eyebrow">Mobilité urbaine · IA responsable</span>
+              <h3>Voir la congestion venir, et déplacer les bus avant qu'elle ne bloque la ville.</h3>
+              <p>FlowPulse lit les flux des antennes mobiles, prévoit les zones saturées 30 à 60 minutes à l'avance et propose des réaffectations de bus justifiées par les textes en vigueur.</p>
+              <div class="row"><button class="btn btn-primary" type="button">Voir la démo<svg aria-hidden="true"><use href="#i-arrow"/></svg></button><button class="btn btn-secondary" type="button">Notre approche</button></div>
+            </div>
+            <div class="l-map"><svg class="hexmap" data-seed="1" data-hot="0.5,0.45,1;0.75,0.7,0.6" data-line="1" viewBox="0 0 400 300" aria-hidden="true"></svg>
+            </div>
+          </div>
+          <div class="l-strip">
+            <div><b>Détecter</b>Les agents surveillent les flux en continu et signalent les pics avant qu'ils ne bloquent la ville.</div>
+            <div><b>Réagir</b>L'opérateur reçoit une recommandation de réaffectation et l'applique en un clic.</div>
+            <div><b>Justifier</b>Chaque décision cite les textes applicables et garde la trace du raisonnement.</div>
+          </div>
+        </div>
+      </div>
+      <p class="note">Sections prévues pour la landing : en-tête, fonctionnement en 3 étapes, profils (municipalité, opérateur, urbaniste), conformité et normes ITU, chiffres de la démo, équipe Mboa Labs, accès à la démo.</p>
+
+      <div class="mock">
+        <div class="mock-bar"><i></i><i></i><i></i></div>
+        <div class="shell">
+          <aside class="s-side">
+            <div class="lockup"><svg aria-hidden="true"><use href="#logo-inv"/></svg><span class="w">Flow<span style="color:#2BC48A">Pulse</span></span></div>
+            <a class="on" href="#gabarits">Tableau de bord</a>
+            <a href="#gabarits">Alertes <span class="count">4</span></a>
+            <a href="#gabarits">Flotte</a>
+            <a href="#gabarits">Simulation</a>
+            <a href="#gabarits">Manques réglementaires</a>
+            <a href="#gabarits">Superviseur IA</a>
+          </aside>
+          <div class="s-main">
+            <div class="s-top"><h4>Tableau de bord · aujourd'hui 17 h 20</h4><span class="badge b-dense"><svg aria-hidden="true"><use href="#i-alert"/></svg>Tension en hausse</span></div>
+            <div class="s-kpis"><div>Congestion<b>62 %</b></div><div>Alertes<b>4</b></div><div>Attente moy.<b>14 min</b></div></div>
+            <div class="s-body">
+              <div class="s-map"><svg class="hexmap" data-seed="3" data-hot="0.35,0.38,1;0.68,0.62,0.6" data-pins="1" viewBox="0 0 400 220" aria-hidden="true"></svg>
+              </div>
+              <div class="s-list">
+                <div><b>Mokolo · saturé</b>17 h 45 · ≈ 420 en attente</div>
+                <div class="o"><b>Poste centrale · dense</b>18 h 00 · ≈ 265 en attente</div>
+                <div class="y"><b>Mvog-Mbi · modéré</b>18 h 20 · ≈ 140 en attente</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="note">Barre latérale encre dans les deux thèmes : elle ancre la marque et sépare navigation et contenu. Le menu ne montre que les écrans du rôle connecté.</p>
+
+      <div class="panel">
+        <h3>Écrans à maquetter</h3>
+        <div class="screens">
+          <div><b>Landing page</b>Présentation publique, démo, équipe</div>
+          <div><b>Connexion</b>Email, mot de passe, mot de passe oublié</div>
+          <div><b>Tableau de bord</b>Gestionnaire : carte, indicateurs, alertes</div>
+          <div><b>Centre d'alertes</b>Liste, fiche d'alerte, acquitter, transmettre, contingence</div>
+          <div><b>Flotte</b>Opérateur : arrêts en tension par ligne, recommandations, historique</div>
+          <div><b>Recommandation</b>Plan, verdict de conformité, citations, raisonnement</div>
+          <div><b>Superviseur IA</b>Questions en langage naturel, réponses sourcées, surbrillance carte</div>
+          <div><b>Simulation</b>Urbaniste : scénario, comparaison avant / après</div>
+          <div><b>Manques réglementaires</b>Registre, catégories, exemples internationaux</div>
+          <div><b>Administration</b>Comptes, rôles, base de connaissances, état des agents</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="mouvement">
+      <div class="sec-head"><span class="eyebrow">Mouvement</span><h2>Discret et utile</h2><p>L'animation signale un changement, elle ne décore pas. Tout mouvement est désactivé si l'utilisateur l'a demandé dans son système.</p></div>
+      <div class="grid-3">
+        <div class="panel"><h3>150 ms</h3><p class="note">Survol, focus, changement d'état d'un bouton. Courbe <code>ease-out</code>.</p></div>
+        <div class="panel"><h3>250 ms</h3><p class="note">Ouverture d'un panneau latéral, d'une fiche d'alerte, d'un menu.</p></div>
+        <div class="panel"><h3>Impulsion d'alerte</h3><p class="note">Un anneau qui s'étend autour du point d'alerte, comme un arrêt qui « bat ». Réservé aux alertes saturées non acquittées.</p></div>
+      </div>
+    </section>
+
+    <section id="redaction">
+      <div class="sec-head"><span class="eyebrow">Rédaction</span><h2>Ton et rédaction</h2><p>Vouvoiement, phrases courtes, chiffres avec leurs unités. Les mots de l'utilisateur, pas ceux du système.</p></div>
+      <div class="do-dont">
+        <div class="do"><b>À faire</b><span>« Forte tension prévue à Mokolo vers 17 h 45 : environ 420 personnes en attente. »</span><span>« Appliquer la recommandation »</span><span>« L'heure de fin doit être après l'heure de début. »</span></div>
+        <div class="no"><b>À éviter</b><span>« Anomalie détectée par l'agent Watcher (seuil 0,82 dépassé). »</span><span>« Valider » ou « OK »</span><span>« Erreur de saisie. »</span></div>
+      </div>
+    </section>
+
+    <section id="accessibilite">
+      <div class="sec-head"><span class="eyebrow">Accessibilité</span><h2>Règles minimales</h2></div>
+      <div class="panel">
+        <ul class="clean">
+          <li>Contraste d'au moins 4,5:1 pour le texte et 3:1 pour les icônes et bordures utiles (niveau WCAG AA), dans les deux thèmes.</li>
+          <li>Un état n'est jamais indiqué par la seule couleur : libellé, icône ou motif l'accompagnent.</li>
+          <li>Tout est utilisable au clavier ; le focus est un contour bleu de 3 px, toujours visible.</li>
+          <li>Les zones cliquables font au moins 40 × 40 px ; 44 px sur mobile.</li>
+          <li>La carte a une alternative en liste (arrêts, axes, alertes) pour les lecteurs d'écran.</li>
+          <li>Textes en français par défaut ; interface prévue pour une version anglaise (jury ITU).</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var ids = { "t-auto": null, "t-light": "light", "t-dark": "dark" };
+    function apply(id) {
+      var v = ids[id];
+      if (v) root.setAttribute("data-theme", v); else root.removeAttribute("data-theme");
+      Object.keys(ids).forEach(function (k) {
+        var b = document.getElementById(k);
+        if (b) b.setAttribute("aria-pressed", String(k === id));
+      });
+      try { localStorage.setItem("fp-charte-theme", id); } catch (e) {}
+    }
+    Object.keys(ids).forEach(function (k) {
+      var b = document.getElementById(k);
+      if (b) b.addEventListener("click", function () { apply(k); });
+    });
+    try { var saved = localStorage.getItem("fp-charte-theme"); if (saved && saved in ids) apply(saved); } catch (e) {}
+  })();
+</script>
+<script>
+(function () {
+  /* ---------- Cartes en cellules hexagonales (aplats, aucun dégradé) ---------- */
+  var RAMP = ["#FBF0B8", "#FAD46A", "#F5A23A", "#E8682C", "#C2264B", "#6A1B5F"];
+  function rnd(seed) { var s = seed * 9301 + 49297; return function () { s = (s * 9301 + 49297) % 233280; return s / 233280; }; }
+  function cssVar(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+  function drawMap(svg) {
+    var vb = svg.viewBox.baseVal, W = vb.width, H = vb.height, NS = "http://www.w3.org/2000/svg";
+    var dark = svg.dataset.dark === "1";
+    var bg = dark ? "#232838" : cssVar("--map-bg"), road = dark ? "#2F3647" : cssVar("--map-road"), water = dark ? "#1F2B38" : cssVar("--map-water");
+    var hot = (svg.dataset.hot || "").split(";").filter(Boolean).map(function (h) { var p = h.split(",").map(Number); return { x: p[0] * W, y: p[1] * H, s: p[2] }; });
+    var R = Math.max(10, Math.round(W / 46)), r = rnd(+svg.dataset.seed || 1);
+    var out = '<rect width="' + W + '" height="' + H + '" fill="' + bg + '"/>';
+    out += '<path d="M' + (W * 0.78) + " 0 C" + (W * 0.72) + " " + (H * 0.3) + " " + (W * 0.9) + " " + (H * 0.55) + " " + (W * 0.84) + " " + H + 'L' + W + " " + H + "L" + W + ' 0Z" fill="' + water + '"/>';
+    var roads = [[0, 0.3, 0.35, 0.22, 0.65, 0.42, 1, 0.34], [0.22, 0, 0.3, 0.35, 0.38, 0.7, 0.46, 1], [0, 0.78, 0.4, 0.7, 0.7, 0.86, 1, 0.8], [0.55, 0, 0.5, 0.4, 0.62, 0.6, 0.66, 1]];
+    roads.forEach(function (q) {
+      out += '<path d="M' + q[0] * W + " " + q[1] * H + " C" + q[2] * W + " " + q[3] * H + " " + q[4] * W + " " + q[5] * H + " " + q[6] * W + " " + q[7] * H + '" fill="none" stroke="' + road + '" stroke-width="' + (R * 0.7) + '" stroke-linecap="round"/>';
+    });
+    var hw = Math.sqrt(3) * R, hexes = "";
+    for (var row = -1; row * R * 1.5 < H + R; row++) {
+      for (var col = -1; col * hw < W + hw; col++) {
+        var cx = col * hw + (row % 2 ? hw / 2 : 0), cy = row * R * 1.5, v = 0;
+        hot.forEach(function (h) { var d2 = (cx - h.x) * (cx - h.x) + (cy - h.y) * (cy - h.y), sg = W * 0.12; v += h.s * Math.exp(-d2 / (2 * sg * sg)); });
+        v += (r() - 0.5) * 0.12;
+        if (v < 0.24) continue;
+        var cls = Math.min(RAMP.length - 1, Math.floor((v - 0.24) / 0.13));
+        var pts = [];
+        for (var k = 0; k < 6; k++) { var a = Math.PI / 180 * (60 * k - 30); pts.push((cx + (R - 1.2) * Math.cos(a)).toFixed(1) + "," + (cy + (R - 1.2) * Math.sin(a)).toFixed(1)); }
+        hexes += '<polygon points="' + pts.join(" ") + '" fill="' + RAMP[cls] + '" fill-opacity="0.78"/>';
+      }
+    }
+    out += hexes;
+    if (svg.dataset.closed === "1") {
+      out += '<path d="M' + 0.22 * W + " 0 C" + 0.3 * W + " " + 0.35 * H + " " + 0.38 * W + " " + 0.7 * H + " " + 0.46 * W + " " + H + '" fill="none" stroke="#C92A2A" stroke-width="' + R * 0.35 + '" stroke-dasharray="' + R * 0.6 + " " + R * 0.5 + '"/>';
+    }
+    if (svg.dataset.line === "1" || svg.classList.contains("hexmap") && svg.closest(".lp-visual")) {
+      var L = [[0.08, 0.86], [0.26, 0.64], [0.4, 0.42], [0.58, 0.46], [0.8, 0.3]];
+      out += '<polyline points="' + L.map(function (p) { return p[0] * W + "," + p[1] * H; }).join(" ") + '" fill="none" stroke="#D6336C" stroke-width="' + R * 0.42 + '" stroke-linecap="round" stroke-linejoin="round"/>';
+      L.slice(1).forEach(function (p) { out += '<circle cx="' + p[0] * W + '" cy="' + p[1] * H + '" r="' + R * 0.42 + '" fill="#fff" stroke="#D6336C" stroke-width="' + R * 0.22 + '"/>'; });
+    }
+    if (svg.dataset.pins === "1") {
+      hot.forEach(function (h, i) {
+        var c = i === 0 ? "#C92A2A" : i === 1 ? "#E8590C" : "#D99800";
+        out += '<circle cx="' + h.x + '" cy="' + h.y + '" r="' + R * 0.62 + '" fill="' + c + '" stroke="#fff" stroke-width="' + R * 0.22 + '"/>';
+      });
+    }
+    svg.innerHTML = out;
+  }
+  function drawAll() { document.querySelectorAll("svg.hexmap").forEach(drawMap); }
+  drawAll();
+  try { window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", drawAll); } catch (e) {}
+  document.querySelectorAll(".theme-toggle button").forEach(function (b) { b.addEventListener("click", function () { setTimeout(drawAll, 0); }); });
+})();
+</script>
+
+</body>
+</html>
