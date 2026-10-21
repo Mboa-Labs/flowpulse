@@ -1,0 +1,35 @@
+@startuml 11_agents
+!include _style.iuml
+title Système multi-agents — rôles, outils et garde-fous
+
+component "Orchestrator Agent\n(LLM routeur, LangGraph)\n--\noutils : tous les agents,\nrequêtes de données" as ORC #FDEBD0
+
+component "Watcher Agent\nplanifié toutes les X min\n--\noutils : predict(), cluster()" as WAT
+component "Optimizer Agent\nOR-Tools (affectation bus)\n--\noutils : fleet_available(),\npropose_plan()" as OPT
+component "Simulator Agent\ngraphe routier NetworkX\n--\noutil : simulate(scenario)" as SIM
+component "Policy & Conformité Agent\nRAG + LLM\n--\noutils : search_kb(),\ncheck_compliance(), log_gap()" as POL #E8F6EF
+database "agent_traces\n(log_trace)" as TR
+
+ORC --> WAT : état courant / alertes
+ORC --> OPT : demande de plan
+ORC --> SIM : demande de simulation
+ORC --> POL : vérifier toute réponse\nqui recommande une action
+
+WAT --> OPT : zone en tension
+OPT --> POL : plan à valider
+SIM --> POL : mesures à valider
+
+ORC ..> TR
+WAT ..> TR
+OPT ..> TR
+SIM ..> TR
+POL ..> TR
+
+note right of POL
+  Garde-fous :
+  - aucune action appliquée sans validation humaine
+  - réponse sans source = signalée « non sourcée »
+  - pas de donnée individuelle dans les prompts
+  - aucun texte applicable → manque réglementaire
+end note
+@enduml

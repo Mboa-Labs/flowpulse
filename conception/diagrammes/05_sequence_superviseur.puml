@@ -1,0 +1,40 @@
+@startuml 05_sequence_superviseur
+!include _style.iuml
+title Séquence — Question au superviseur conversationnel (avec traces et sources)
+autonumber
+
+actor "Gestionnaire\nurbain" as GU
+participant "Frontend\nReact" as FE
+participant "Spring Boot" as BE
+participant "Orchestrator\nAgent" as ORC
+participant "Ollama\nLLM" as LLM
+participant "Outils agents\n(Watcher, Optimizer,\nSimulator, données)" as TOOLS
+participant "Policy\nAgent" as POL
+database "PostgreSQL\n(mobility, kb)" as DB
+
+GU -> FE : « Quelles sont les 3 zones les plus saturées\nà Yaoundé en ce moment, et que faire ? »
+FE -> BE : POST /api/assistant/ask (JWT)
+BE -> BE : vérifier rôle + AuditLog
+BE -> ORC : POST /ai/assistant {question, rôle, sessionId}
+ORC -> LLM : planifier (question + catalogue d'outils)
+LLM --> ORC : appels d'outils : top_zones(3), recommander(zones)
+ORC -> TOOLS : top_zones(n = 3)
+TOOLS -> DB : indicateurs courants
+DB --> TOOLS : zones + densités
+TOOLS --> ORC : Mvog-Mbi, Mokolo, Poste Centrale (exemple)
+ORC -> TOOLS : recommander(zones)
+TOOLS --> ORC : plan d'action
+ORC -> POL : verifier(plan)
+POL -> DB : recherche vectorielle KB
+DB --> POL : articles pertinents
+POL --> ORC : verdict + citations
+ORC -> LLM : rédiger la réponse (résultats + citations)
+LLM --> ORC : réponse en langage naturel
+ORC -> DB : enregistrer AgentTrace (chaque étape)
+ORC --> BE : {réponse, citations[], carte[], traceId}
+BE --> FE : réponse
+FE -> FE : texte + surbrillance carte + sources cliquables
+GU -> FE : « Voir le raisonnement »
+FE -> BE : GET /api/traces/{traceId}
+BE --> FE : étapes, outils, durées, sources
+@enduml

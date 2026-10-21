@@ -1,0 +1,256 @@
+@startuml 03_classes
+!include _style.iuml
+title FlowPulse — Diagramme de classes (modèle de domaine)
+hide empty methods
+
+package "Accès & audit" {
+  enum Role {
+    GESTIONNAIRE
+    OPERATEUR
+    URBANISTE
+    ADMIN
+  }
+  class Utilisateur {
+    id : UUID
+    nom : String
+    email : String
+    motDePasseHash : String
+    role : Role
+    actif : boolean
+    derniereConnexion : DateTime
+  }
+  class AuditLog {
+    id : UUID
+    action : String
+    entite : String
+    entiteId : UUID
+    details : JSON
+    horodatage : DateTime
+  }
+}
+
+package "Territoire & mobilité" {
+  class Zone {
+    id : UUID
+    nom : String
+    arrondissement : String
+    geom : Polygon
+    population : int
+  }
+  class Antenne {
+    id : String
+    latitude : double
+    longitude : double
+    operateur : String
+  }
+  class FluxMobilite {
+    id : long
+    horodatage : DateTime
+    volume : int
+  }
+  class IndicateurZone {
+    horodatage : DateTime
+    densite : double
+    entrees : int
+    sorties : int
+    niveau : NiveauCongestion
+  }
+  class AxeRoutier {
+    id : UUID
+    nom : String
+    geom : LineString
+    capaciteVehHeure : int
+  }
+  class Prediction {
+    id : UUID
+    horodatageCible : DateTime
+    horizonMin : int
+    valeurPredite : double
+    risque : double
+    versionModele : String
+  }
+  enum NiveauCongestion {
+    VERT
+    ORANGE
+    ROUGE
+  }
+}
+
+package "Transport" {
+  class LigneBus {
+    id : UUID
+    code : String
+    nom : String
+  }
+  class Arret {
+    id : UUID
+    nom : String
+    geom : Point
+    attenteEstimee : int
+  }
+  class Bus {
+    id : UUID
+    immatriculation : String
+    capacite : int
+    statut : StatutBus
+    position : Point
+  }
+  enum StatutBus {
+    EN_SERVICE
+    RESERVE
+    MAINTENANCE
+  }
+  class Intervention {
+    id : UUID
+    dateApplication : DateTime
+    attenteAvantMin : double
+    attenteApresMin : double
+  }
+}
+
+package "Décision & IA" {
+  class Alerte {
+    id : UUID
+    type : TypeAlerte
+    severite : int
+    statut : StatutAlerte
+    heureEstimee : DateTime
+    intensiteFoule : int
+    dateCreation : DateTime
+  }
+  enum TypeAlerte {
+    PIC_FOULE
+    CONGESTION_PREVUE
+    ZONE_SOUS_DESSERVIE
+    ANOMALIE_FLUX
+  }
+  enum StatutAlerte {
+    NOUVELLE
+    ACQUITTEE
+    TRANSMISE
+    EN_CONTINGENCE
+    CLOTUREE
+  }
+  class Recommandation {
+    id : UUID
+    description : String
+    actions : JSON
+    statut : StatutRecommandation
+    conformite : StatutConformite
+    justification : String
+  }
+  enum StatutRecommandation {
+    PROPOSEE
+    APPROUVEE
+    REJETEE
+    APPLIQUEE
+  }
+  enum StatutConformite {
+    CONFORME
+    CONFORME_SOUS_RESERVE
+    NON_CONFORME
+    NON_COUVERT
+  }
+  class Scenario {
+    id : UUID
+    evenement : String
+    parametres : JSON
+    resultat : JSON
+    dateExecution : DateTime
+  }
+  class AgentTrace {
+    id : UUID
+    sessionId : UUID
+    agent : String
+    etape : int
+    outil : String
+    entree : JSON
+    sortie : JSON
+    dureeMs : int
+    horodatage : DateTime
+  }
+  class Conversation {
+    id : UUID
+    question : String
+    reponse : String
+    dateCreation : DateTime
+  }
+}
+
+package "Base de connaissances réglementaire" {
+  class DocumentReglementaire {
+    id : UUID
+    titre : String
+    reference : String
+    type : TypeTexte
+    autorite : String
+    dateAdoption : Date
+    url : String
+  }
+  enum TypeTexte {
+    LOI
+    DECRET
+    ARRETE
+    STRATEGIE
+    NORME_ITU
+    EXEMPLE_INTERNATIONAL
+  }
+  class ChunkKB {
+    id : UUID
+    article : String
+    texte : String
+    embedding : vector(1024)
+  }
+  class ManqueReglementaire {
+    id : UUID
+    categorie : CategorieManque
+    description : String
+    exempleInternational : String
+    statut : String
+  }
+  enum CategorieManque {
+    RESPONSABILITE_FLOUE
+    NORME_ABSENTE
+    VIDE_JURIDIQUE
+    COORDINATION
+    OBJECTIFS_CONTRADICTOIRES
+  }
+  class Citation {
+    extrait : String
+    score : double
+  }
+}
+
+Utilisateur "1" -- "*" AuditLog : effectue >
+Utilisateur "1" -- "*" Conversation
+Utilisateur "1" -- "*" Scenario : lance >
+
+Zone "1" -- "*" Antenne : contient >
+Antenne "1" -- "*" FluxMobilite : origine
+Antenne "1" -- "*" FluxMobilite : destination
+Zone "1" -- "*" IndicateurZone
+Zone "*" -- "*" AxeRoutier : traverse
+AxeRoutier "1" -- "*" Prediction
+Zone "1" -- "*" Prediction
+
+LigneBus "1" o-- "*" Arret : dessert >
+LigneBus "1" -- "*" Bus : affecté >
+Arret "*" -- "1" Zone
+
+Alerte "*" -- "1" Zone : concerne >
+Alerte "*" -- "0..*" AxeRoutier
+Alerte "1" -- "0..*" Recommandation : génère >
+Recommandation "1" -- "0..1" Intervention : produit >
+Intervention "*" -- "*" Bus
+Recommandation "*" -- "0..1" Utilisateur : validée par >
+Recommandation "1" -- "*" Citation
+Conversation "1" -- "*" Citation
+Citation "*" -- "1" ChunkKB
+DocumentReglementaire "1" *-- "*" ChunkKB
+ManqueReglementaire "*" -- "0..*" DocumentReglementaire : référence >
+ManqueReglementaire "*" -- "0..1" Recommandation : détecté lors de >
+
+AgentTrace "*" -- "0..1" Recommandation
+AgentTrace "*" -- "0..1" Conversation
+AgentTrace "*" -- "0..1" Alerte
+@enduml

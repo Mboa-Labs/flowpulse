@@ -1,0 +1,35 @@
+@startuml 09_etats_alerte_recommandation
+!include _style.iuml
+title États — Cycle de vie d'une alerte et d'une recommandation
+
+state "Alerte" as A {
+  [*] --> NOUVELLE : Watcher détecte un risque
+  NOUVELLE --> ACQUITTEE : gestionnaire acquitte
+  NOUVELLE --> TRANSMISE : transmise à une équipe
+  ACQUITTEE --> TRANSMISE
+  ACQUITTEE --> EN_CONTINGENCE : plan de contingence
+  TRANSMISE --> EN_CONTINGENCE
+  ACQUITTEE --> CLOTUREE : situation normale
+  TRANSMISE --> CLOTUREE
+  EN_CONTINGENCE --> CLOTUREE : risque < seuil
+  NOUVELLE --> CLOTUREE : expirée (fausse alerte)
+  CLOTUREE --> [*]
+}
+
+state "Recommandation" as R {
+  [*] --> PROPOSEE : Optimizer + verdict Policy
+  PROPOSEE --> APPROUVEE : opérateur approuve
+  PROPOSEE --> REJETEE : opérateur rejette (motif)
+  PROPOSEE --> REJETEE : NON_CONFORME (bloquée)
+  APPROUVEE --> APPLIQUEE : ordres de mission envoyés
+  APPLIQUEE --> [*] : impact mesuré (Intervention)
+  REJETEE --> [*]
+}
+
+note right of R
+  Une recommandation NON_COUVERT
+  (aucun texte applicable) reste
+  PROPOSEE mais exige une validation
+  explicite et crée un manque réglementaire.
+end note
+@enduml

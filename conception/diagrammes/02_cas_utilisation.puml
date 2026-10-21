@@ -1,0 +1,91 @@
+@startuml 02_cas_utilisation
+!include _style.iuml
+title FlowPulse — Diagramme de cas d'utilisation
+left to right direction
+
+actor "Utilisateur\nauthentifié" as U
+actor "Gestionnaire urbain" as GU
+actor "Opérateur de transport" as OP
+actor "Urbaniste / R&D" as UR
+actor "Administrateur" as AD
+actor "Agents IA\n(système)" as AG <<système>>
+actor "Ollama (LLM)" as LLM <<système>>
+
+GU --|> U
+OP --|> U
+UR --|> U
+AD --|> U
+
+  rectangle "Module 0 — Accès" {
+    usecase "S'authentifier" as UC_LOGIN
+    usecase "Vérifier les identifiants" as UC_VERIF
+    usecase "Réinitialiser le mot de passe" as UC_RESET
+    usecase "Se déconnecter" as UC_LOGOUT
+  }
+  rectangle "Surveillance & alertes" {
+    usecase "Consulter le tableau de bord\n(carte de chaleur, KPIs)" as UC_DASH
+    usecase "Consulter les prédictions\nde congestion" as UC_PRED
+    usecase "Gérer une alerte\n(acquitter, transmettre,\nplan de contingence)" as UC_ALERT
+    usecase "Interroger le superviseur\nconversationnel" as UC_CHAT
+    usecase "Consulter la trace\net les sources d'une réponse" as UC_TRACE
+  }
+  rectangle "Transport" {
+    usecase "Suivre l'adéquation\noffre / demande par arrêt" as UC_OFFRE
+    usecase "Valider / rejeter une\nrecommandation de flotte" as UC_RECO
+    usecase "Consulter l'historique\ndes interventions" as UC_HIST
+  }
+  rectangle "Planification" {
+    usecase "Simuler un scénario What-If\n(événement, aménagement)" as UC_SIM
+    usecase "Identifier les zones\nsous-desservies" as UC_ZONES
+    usecase "Analyser les indicateurs\nde mobilité" as UC_IND
+    usecase "Exporter (CSV)" as UC_EXP
+    usecase "Consulter le registre\ndes manques réglementaires" as UC_GAPS
+  }
+  rectangle "Administration" {
+    usecase "Gérer les utilisateurs\net les rôles" as UC_USERS
+    usecase "Gérer la base de connaissances\n(ajouter un texte)" as UC_KB
+    usecase "Superviser pipelines\net agents" as UC_SUP
+    usecase "Consulter les journaux d'audit" as UC_AUDIT
+  }
+  rectangle "Automatique" {
+    usecase "Détecter une anomalie\nde flux" as UC_DETECT
+    usecase "Générer une recommandation\nde réaffectation" as UC_GEN
+    usecase "Vérifier la conformité\nréglementaire" as UC_CONF
+  }
+
+U --> UC_LOGIN
+U --> UC_LOGOUT
+UC_LOGIN ..> UC_VERIF : <<include>>
+UC_RESET ..> UC_LOGIN : <<extend>>
+
+GU --> UC_DASH
+GU --> UC_PRED
+GU --> UC_ALERT
+GU --> UC_CHAT
+UC_CHAT ..> UC_TRACE : <<extend>>
+
+OP --> UC_OFFRE
+OP --> UC_RECO
+OP --> UC_HIST
+OP --> UC_CHAT
+
+UR --> UC_SIM
+UR --> UC_ZONES
+UR --> UC_IND
+UR --> UC_GAPS
+UC_EXP ..> UC_IND : <<extend>>
+UR --> UC_PRED
+
+AD --> UC_USERS
+AD --> UC_KB
+AD --> UC_SUP
+AD --> UC_AUDIT
+
+AG --> UC_DETECT
+AG --> UC_GEN
+UC_GEN ..> UC_CONF : <<include>>
+UC_DETECT ..> UC_ALERT : déclenche
+UC_CHAT ..> UC_CONF : <<include>>
+UC_CONF -- LLM
+UC_CHAT -- LLM
+@enduml

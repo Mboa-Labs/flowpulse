@@ -1,0 +1,41 @@
+@startuml 06_sequence_authentification
+!include _style.iuml
+title Séquence — Authentification JWT et redirection par rôle
+autonumber
+
+actor Utilisateur as U
+participant "Frontend\nReact" as FE
+participant "AuthController" as AC
+participant "AuthService" as AS
+participant "UtilisateurRepository" as UR
+participant "JwtService" as JWT
+participant "AuditService" as AUD
+
+U -> FE : email + mot de passe
+FE -> AC : POST /api/auth/login
+AC -> AS : authentifier(email, mdp)
+AS -> UR : findByEmail(email)
+UR --> AS : Utilisateur
+alt identifiants valides et compte actif
+  AS -> AS : BCrypt.matches(mdp, hash)
+  AS -> JWT : générer accessToken (15 min) + refreshToken (7 j)
+  JWT --> AS : jetons (claims : id, rôle)
+  AS -> AUD : log(LOGIN_OK)
+  AS --> AC : jetons + rôle
+  AC --> FE : 200 {accessToken, refreshToken, rôle}
+  FE -> FE : redirection selon le rôle\n(Gestionnaire → Dashboard, Opérateur → Flotte,\nUrbaniste → Simulation, Admin → Administration)
+else invalides
+  AS -> AUD : log(LOGIN_ECHEC)
+  AC --> FE : 401
+end
+
+== Requête protégée ==
+FE -> AC : GET /api/... (Authorization: Bearer)
+AC -> JWT : valider jeton + rôle (@PreAuthorize)
+alt jeton expiré
+  FE -> AC : POST /api/auth/refresh
+  AC --> FE : nouvel accessToken
+end
+== Inactivité ==
+FE -> FE : déconnexion automatique après 30 min sans activité
+@enduml

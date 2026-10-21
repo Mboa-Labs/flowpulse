@@ -1,0 +1,17 @@
+# Dépôt ITU cloné à part (référence externe)
+ITUAIReadiness/
+
+# Base vectorielle générée
+knowledge-base/chroma/
+
+# SND30 : reproduction interdite sans accord écrit du MINEPAT (lien dans sources.csv)
+knowledge-base/InputDocs/Cameroun/06_Strategies_nationales/snd30_*.pdf
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Système
+.DS_Store
+Thumbs.db

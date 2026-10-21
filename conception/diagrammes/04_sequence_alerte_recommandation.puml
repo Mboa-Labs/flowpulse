@@ -1,0 +1,62 @@
+@startuml 04_sequence_alerte_recommandation
+!include _style.iuml
+title Séquence — Détection proactive → recommandation conforme → validation humaine
+autonumber
+
+participant "Watcher\nAgent" as WAT
+participant "Moteur ML" as ML
+participant "Optimizer\nAgent" as OPT
+participant "Policy\nAgent" as POL
+database "KB\n(pgvector)" as KB
+participant "Ollama\nLLM" as LLM
+participant "Traceur" as TR
+participant "Spring Boot\n(API + services)" as BE
+participant "Frontend\nReact" as FE
+actor "Opérateur\nde bus" as OP
+
+loop toutes les X minutes
+  WAT -> ML : predire(zones, horizon = 30-60 min)
+  ML --> WAT : risques par zone / axe
+  WAT -> ML : clusteriser(densités courantes)
+  ML --> WAT : zones de tension
+end
+
+alt risque > seuil
+  WAT -> TR : log(étape détection, entrées, sorties)
+  WAT -> BE : POST /internal/alerts (webhook)
+  BE -> BE : enregistrer Alerte (NOUVELLE) + AuditLog
+  BE -> FE : WebSocket /topic/alerts
+  FE -> FE : notification visuelle + sonore
+
+  WAT -> OPT : optimiser(zone en tension, flotte disponible)
+  OPT -> BE : GET /internal/fleet/available
+  BE --> OPT : bus en réserve, positions
+  OPT -> OPT : affectation optimale (OR-Tools)
+  OPT -> POL : verifier(plan de réaffectation)
+  POL -> KB : recherche(textes pertinents : transport,\ndonnées perso, compétences CUY)
+  KB --> POL : articles + scores
+  POL -> LLM : évaluer conformité (plan + articles)
+  LLM --> POL : verdict + justification + citations
+  opt aucun texte ne couvre la décision
+    POL -> KB : créer ManqueReglementaire
+  end
+  POL --> OPT : CONFORME / SOUS RÉSERVE / NON CONFORME
+  OPT -> TR : log(plan, verdict, sources)
+  OPT -> BE : POST /internal/recommendations
+  BE -> FE : WebSocket /topic/recommendations
+end
+
+OP -> FE : ouvrir la recommandation
+FE -> BE : GET /api/recommendations/{id}
+BE --> FE : plan + justification + citations + trace
+alt l'opérateur approuve
+  OP -> FE : « Appliquer la recommandation »
+  FE -> BE : POST /api/recommendations/{id}/apply
+  BE -> BE : statut APPLIQUEE, Intervention, ordres de mission, AuditLog
+  BE --> FE : 200 OK
+else l'opérateur rejette
+  OP -> FE : rejeter (motif)
+  FE -> BE : POST /api/recommendations/{id}/reject
+  BE -> BE : statut REJETEE + AuditLog (motif réutilisé par l'agent)
+end
+@enduml

@@ -1,0 +1,47 @@
+@startuml 08_activite_pipeline_y3172
+!include _style.iuml
+title Activité — Pipeline de données et de décision (nœuds Y.3172)
+
+|SRC — Sources|
+start
+:Recevoir le dataset opérateur\n(flux antenne → antenne, horodatés);
+:Charger OSM Yaoundé, réseau de bus,\ntextes réglementaires;
+|C — Collecteur|
+:Adaptateur d'ingestion\n(CSV / Parquet → format pivot);
+if (schéma conforme au contrat ?) then (oui)
+else (non)
+  :Rejeter le lot + journal d'erreur;
+  stop
+endif
+|PP — Prétraitement|
+:Anonymiser\n(aucun identifiant individuel,\nseuil k ≥ 10 par cellule);
+:Rattacher antennes → zones (PostGIS);
+:Agréger par zone et par heure;
+:Calculer indicateurs\n(densité, entrées/sorties, matrices O-D, bandicoot);
+|M — Modèle|
+fork
+  :Prédire la saturation\n(horizon 30-60 min);
+fork again
+  :Clustering DBSCAN\ndes zones de tension;
+end fork
+|P — Politique|
+if (risque > seuil ?) then (oui)
+  :Optimizer : plan de réaffectation;
+  :Policy Agent : vérifier la conformité\n(RAG sur la KB);
+  if (texte applicable trouvé ?) then (oui)
+    :Verdict + citations;
+  else (non)
+    :Enregistrer un manque réglementaire;
+    :Verdict NON_COUVERT\n(validation humaine obligatoire);
+  endif
+else (non)
+  :Mettre à jour la carte uniquement;
+endif
+|D — Distribution|
+:Publier alerte / recommandation\n(webhook → Spring → WebSocket);
+:Écrire AgentTrace + AuditLog;
+|SINK — Destinataires|
+:Dashboard gestionnaire,\nécran opérateur de bus;
+:Décision humaine (appliquer / rejeter);
+stop
+@enduml

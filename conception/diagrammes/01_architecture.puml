@@ -1,0 +1,111 @@
+@startuml 01_architecture
+!include _style.iuml
+title FlowPulse — Architecture logique (v2)
+left to right direction
+
+actor "Gestionnaire urbain\n(CUY)" as GU
+actor "Opérateur de bus" as OP
+actor "Urbaniste / R&D" as UR
+actor "Administrateur" as AD
+
+package "Frontend — React (Vite)" as FE #EAF4FB {
+  component "Dashboard & carte de chaleur\n(MapLibre + deck.gl)" as C_MAP
+  component "Centre d'alertes\n(WebSocket STOMP)" as C_ALERT
+  component "Flotte & recommandations" as C_FLEET
+  component "Simulateur What-If" as C_SIM
+  component "Superviseur conversationnel\n+ panneau de traces" as C_CHAT
+  component "Administration" as C_ADMIN
+}
+
+package "Backend métier — Spring Boot 3 (Java 21)" as BE #EEF7EA {
+  component "Sécurité\nJWT + RBAC" as B_SEC
+  component "API REST\n(Controllers)" as B_API
+  component "Services métier\nalertes · flotte · scénarios" as B_SVC
+  component "Audit & journalisation" as B_AUD
+  component "Notifications\nWebSocket" as B_WS
+  component "Client service IA\n(WebClient)" as B_AIC
+  component "Repositories\nJPA / Hibernate" as B_REPO
+}
+
+package "Service IA — Python FastAPI" as AI #FDF2E9 {
+  package "Pipeline de données (Y.3172 : C, PP)" as PIPE {
+    component "Ingestion\n(adaptateurs dataset)" as P_ING
+    component "Anonymisation\n& normalisation" as P_ANO
+    component "Indicateurs\n(bandicoot, matrices O-D)" as P_IND
+  }
+  package "Moteur ML (Y.3172 : M)" as ML {
+    component "Prédiction de saturation\n(séries temporelles)" as M_PRED
+    component "Clustering zones de tension\n(DBSCAN)" as M_CLU
+  }
+  package "Système multi-agents (LangGraph)" as AG {
+    component "Orchestrator\n(routeur LLM)" as A_ORC
+    component "Watcher\n(planifié, X min)" as A_WAT
+    component "Optimizer\n(OR-Tools)" as A_OPT
+    component "Simulator\n(graphe routier NetworkX)" as A_SIM
+    component "Policy & Conformité\n(RAG + registre des manques)" as A_POL
+  }
+  component "Indexeur KB\n(découpage par article)" as KB_IDX
+  component "Traceur d'agents\n(agent_traces)" as A_TR
+}
+
+node "Ollama (local)" as OLL {
+  component "LLM\n(ex. Qwen2.5 / Llama 3.1)" as LLM
+  component "Embeddings\n(ex. bge-m3)" as EMB
+}
+
+database "PostgreSQL 16\n+ PostGIS + pgvector" as DB {
+  folder "schéma app\n(utilisateurs, alertes,\nflotte, audit)" as S_APP
+  folder "schéma mobility\n(flux, indicateurs,\nprédictions)" as S_MOB
+  folder "schéma kb\n(documents, chunks,\nmanques, traces)" as S_KB
+}
+
+package "Sources externes (Y.3172 : SRC)" as SRC #F2F3F4 {
+  artifact "Dataset opérateur télécom\n(flux antenne→antenne)" as D_TEL
+  artifact "Réseau routier\n(OpenStreetMap Yaoundé)" as D_OSM
+  artifact "Réseau de bus\n(lignes, arrêts, flotte)" as D_BUS
+  artifact "Textes réglementaires\n(lois, décrets, stratégies)" as D_LAW
+}
+
+GU --> FE
+OP --> FE
+UR --> FE
+AD --> FE
+
+FE --> B_SEC : HTTPS / Axios
+FE <-- B_WS : WebSocket (alertes)
+B_SEC --> B_API
+B_API --> B_SVC
+B_SVC --> B_REPO
+B_SVC --> B_AUD
+B_SVC --> B_WS
+B_SVC --> B_AIC
+B_REPO --> S_APP : JPA
+B_AIC --> A_ORC : REST /ai/*
+A_WAT --> B_API : webhook alertes
+
+D_TEL --> P_ING
+D_OSM --> P_ING
+D_BUS --> P_ING
+P_ING --> P_ANO
+P_ANO --> P_IND
+P_IND --> S_MOB
+S_MOB --> M_PRED
+S_MOB --> M_CLU
+A_WAT --> M_PRED
+A_WAT --> M_CLU
+A_ORC --> A_WAT
+A_ORC --> A_OPT
+A_ORC --> A_SIM
+A_ORC --> A_POL
+A_OPT --> A_POL : validation
+A_POL --> S_KB : recherche vectorielle
+D_LAW --> KB_IDX
+KB_IDX --> EMB
+KB_IDX --> S_KB
+A_ORC --> LLM
+A_POL --> LLM
+A_ORC ..> A_TR
+A_POL ..> A_TR
+A_OPT ..> A_TR
+A_TR --> S_KB
+@enduml

@@ -1,0 +1,30 @@
+@startuml 07_sequence_simulation
+!include _style.iuml
+title Séquence — Simulation What-If (bac à sable Y.3172)
+autonumber
+
+actor "Urbaniste" as UR
+participant "Frontend\nReact" as FE
+participant "Spring Boot\nScenarioService" as BE
+participant "Simulator\nAgent" as SIM
+participant "Graphe routier\n(NetworkX + OSM)" as G
+participant "Policy\nAgent" as POL
+database "PostgreSQL" as DB
+
+UR -> FE : choisir zone + événement\n(ex. fermeture du carrefour Warda 8h-12h)
+FE -> BE : POST /api/scenarios
+BE -> DB : enregistrer Scenario (EN_COURS)
+BE -> SIM : POST /ai/simulate {scenarioId, paramètres}
+SIM -> DB : flux O-D historiques de la plage horaire
+SIM -> G : retirer / ajouter arêtes, capacités
+SIM -> G : réaffecter les flux (plus courts chemins pondérés)
+G --> SIM : charge par axe avant / après
+SIM -> SIM : calculer impact (temps de parcours,\nsurcharge des lignes de bus alternatives)
+SIM -> POL : vérifier mesures d'accompagnement
+POL --> SIM : verdict + citations + manques
+SIM -> DB : résultat + AgentTrace
+SIM --> BE : rapport d'impact
+BE -> DB : Scenario (TERMINE)
+BE --> FE : résultat
+FE -> FE : cartes de chaleur avant / après + rapport
+@enduml

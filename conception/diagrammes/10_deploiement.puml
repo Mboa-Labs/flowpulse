@@ -1,0 +1,29 @@
+@startuml 10_deploiement
+!include _style.iuml
+title Déploiement — docker-compose (démo et serveur de la finale)
+
+node "Poste client" as CLIENT {
+  artifact "Navigateur web" as BROWSER
+}
+
+node "Hôte Docker (Linux, 16 Go RAM, GPU optionnel)" as HOST {
+  node "conteneur : frontend\n(Nginx + build React)\nport 80/443" as N_FE
+  node "conteneur : backend\n(Spring Boot, Java 21)\nport 8080" as N_BE
+  node "conteneur : ai-service\n(FastAPI + LangGraph, Python 3.11)\nport 8000" as N_AI
+  node "conteneur : ollama\nport 11434" as N_OLL {
+    artifact "modèle LLM" as M1
+    artifact "modèle d'embeddings" as M2
+  }
+  database "conteneur : postgres\n(PostgreSQL 16 + PostGIS + pgvector)\nport 5432" as N_DB
+  folder "volume : données\n(dataset, OSM, PDF des lois)" as VOL
+}
+
+BROWSER --> N_FE : HTTPS
+N_FE --> N_BE : /api, /ws (reverse proxy)
+N_BE --> N_AI : REST interne
+N_AI --> N_BE : webhooks internes
+N_BE --> N_DB : JDBC
+N_AI --> N_DB : psycopg / SQLAlchemy
+N_AI --> N_OLL : HTTP
+N_AI --> VOL : lecture
+@enduml
