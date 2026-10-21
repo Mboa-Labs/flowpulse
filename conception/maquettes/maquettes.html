@@ -294,6 +294,12 @@
   .health { display: flex; align-items: center; gap: 8px; font-size: 13.5px; }
 
 
+
+  /* Illustrations */
+  .il { display: block; width: 100%; height: auto; border-radius: 12px; }
+  .lp-visual .il { border-radius: 0; }
+  .preview { position: relative; border-radius: var(--r-xl); overflow: hidden; border: 1px solid var(--border); background: var(--map-bg); }
+  .preview > svg { display: block; width: 100%; height: auto; }
   /* Charte (onglet) */
   .ch { display: grid; gap: 18px; padding: 28px; }
   .ch-sec { display: grid; gap: 14px; }
@@ -344,6 +350,139 @@
     <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
     <symbol id="i-antenna" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12v9M8 21h8"/><circle cx="12" cy="10" r="2"/><path d="M7.8 5.8a6 6 0 0 0 0 8.4M16.2 5.8a6 6 0 0 1 0 8.4"/></symbol>
     <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <pattern id="win" width="12" height="16" patternUnits="userSpaceOnUse"><rect x="3" y="4" width="5" height="7" rx="1" fill="#F6F6F3" fill-opacity="0.55"/></pattern>
+
+    <!-- Illustration principale : la ville, l'antenne, le bus et l'arrêt -->
+    <symbol id="il-hero" viewBox="0 0 560 420">
+      <rect width="560" height="420" fill="#EFEFEA"/>
+      <path d="M0 250C90 200 170 215 250 235S420 195 560 215V420H0Z" fill="#E6D9CA"/>
+      <path d="M0 292C110 262 220 276 320 290S490 270 560 280V420H0Z" fill="#DCC9B4"/>
+      <g>
+        <rect x="56" y="188" width="46" height="118" rx="3" fill="#3A3F4B"/><rect x="56" y="188" width="46" height="118" fill="url(#win)"/>
+        <rect x="108" y="158" width="38" height="148" rx="3" fill="#1B1F2A"/><rect x="108" y="158" width="38" height="148" fill="url(#win)"/>
+        <rect x="152" y="212" width="50" height="94" rx="3" fill="#4A505D"/><rect x="152" y="212" width="50" height="94" fill="url(#win)"/>
+        <rect x="208" y="140" width="34" height="166" rx="3" fill="#2A2F3B"/><rect x="208" y="140" width="34" height="166" fill="url(#win)"/>
+        <rect x="248" y="198" width="58" height="108" rx="3" fill="#3A3F4B"/><rect x="248" y="198" width="58" height="108" fill="url(#win)"/>
+        <rect x="312" y="172" width="40" height="134" rx="3" fill="#1B1F2A"/><rect x="312" y="172" width="40" height="134" fill="url(#win)"/>
+        <rect x="228" y="128" width="6" height="12" fill="#1B1F2A"/>
+      </g>
+      <g fill="none" stroke="#1B1F2A" stroke-width="3" stroke-linecap="round">
+        <path d="M420 306 436 152 452 306M424 266H448M428 226H444M432 190H440M424 266 444 226M448 266 428 226"/>
+      </g>
+      <g fill="none" stroke="#13A06F" stroke-width="4" stroke-linecap="round">
+        <path d="M418.3 128.3A25 25 0 0 1 453.7 128.3"/>
+        <path d="M406 116A42 42 0 0 1 466 116" stroke-opacity="0.6"/>
+        <path d="M394 104A59 59 0 0 1 478 104" stroke-opacity="0.32"/>
+      </g>
+      <circle cx="436" cy="146" r="6" fill="#C2703D"/>
+      <circle cx="34" cy="290" r="18" fill="#0B7A52"/><rect x="32" y="300" width="4" height="10" fill="#1B1F2A"/>
+      <circle cx="378" cy="292" r="14" fill="#13A06F"/><rect x="376" y="300" width="4" height="10" fill="#1B1F2A"/>
+      <rect y="306" width="560" height="12" fill="#CDBBA6"/>
+      <rect y="318" width="560" height="58" fill="#2A2F3B"/>
+      <path d="M0 347H560" stroke="#F6F6F3" stroke-width="3" stroke-dasharray="18 14"/>
+      <rect y="376" width="560" height="44" fill="#CDBBA6"/>
+      <g>
+        <rect x="200" y="268" width="168" height="68" rx="12" fill="#0B7A52"/>
+        <rect x="200" y="268" width="168" height="12" rx="6" fill="#13A06F"/>
+        <rect x="214" y="284" width="26" height="22" rx="4" fill="#DCEFE6"/><rect x="246" y="284" width="26" height="22" rx="4" fill="#DCEFE6"/><rect x="278" y="284" width="26" height="22" rx="4" fill="#DCEFE6"/><rect x="310" y="284" width="26" height="22" rx="4" fill="#DCEFE6"/>
+        <rect x="344" y="284" width="16" height="44" rx="3" fill="#DCEFE6"/>
+        <circle cx="364" cy="326" r="3" fill="#C2703D"/>
+        <circle cx="232" cy="318" r="9" fill="#D6336C"/><text x="232" y="322" text-anchor="middle" font-family="Lexend, sans-serif" font-size="11" font-weight="700" fill="#fff">3</text>
+        <circle cx="232" cy="338" r="12" fill="#1B1F2A"/><circle cx="232" cy="338" r="4" fill="#9AA3B2"/>
+        <circle cx="336" cy="338" r="12" fill="#1B1F2A"/><circle cx="336" cy="338" r="4" fill="#9AA3B2"/>
+      </g>
+      <rect x="470" y="242" width="4" height="66" fill="#1B1F2A"/>
+      <rect x="456" y="230" width="32" height="22" rx="5" fill="#C2703D"/>
+      <path d="M463 236h18v8h-18z" fill="none" stroke="#fff" stroke-width="1.6"/><path d="M466 247v2M478 247v2" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+      <g>
+        <circle cx="494" cy="278" r="6.5" fill="#6B4430"/><rect x="487" y="287" width="14" height="21" rx="7" fill="#C2703D"/>
+        <circle cx="512" cy="276" r="6.5" fill="#4A2E20"/><rect x="505" y="285" width="14" height="23" rx="7" fill="#0B7A52"/>
+        <circle cx="530" cy="279" r="6.5" fill="#6B4430"/><rect x="523" y="288" width="14" height="20" rx="7" fill="#3A3F4B"/>
+        <circle cx="547" cy="281" r="5.5" fill="#4A2E20"/><rect x="541" y="289" width="12" height="19" rx="6" fill="#B08A6A"/>
+      </g>
+      <path d="M520 178c-11 0-19 8-19 19 0 14 19 31 19 31s19-17 19-31c0-11-8-19-19-19Z" fill="#1B1F2A"/>
+      <circle cx="520" cy="197" r="6" fill="#C2703D"/>
+    </symbol>
+
+    <!-- Étape 1 : détecter -->
+    <symbol id="il-detect" viewBox="0 0 240 140">
+      <rect width="240" height="140" rx="16" fill="#EFEFEA"/>
+      <path d="M0 112H240" stroke="#DCC9B4" stroke-width="2"/>
+      <g fill="none" stroke="#1B1F2A" stroke-width="2.6" stroke-linecap="round"><path d="M70 112 82 46 94 112M74 92H90M77 72H87M74 92 87 72M90 92 77 72"/></g>
+      <circle cx="82" cy="42" r="5" fill="#C2703D"/>
+      <g fill="none" stroke="#13A06F" stroke-width="3.2" stroke-linecap="round"><path d="M68 28A20 20 0 0 1 96 28"/><path d="M58 18A34 34 0 0 1 106 18" stroke-opacity="0.5"/></g>
+      <g>
+        <polygon points="150,52 160,58 160,70 150,76 140,70 140,58" fill="#F1E4D6"/>
+        <polygon points="170,52 180,58 180,70 170,76 160,70 160,58" fill="#D59A6C"/>
+        <polygon points="190,52 200,58 200,70 190,76 180,70 180,58" fill="#E6C3A1"/>
+        <polygon points="160,70 170,76 170,88 160,94 150,88 150,76" fill="#C2703D"/>
+        <polygon points="180,70 190,76 190,88 180,94 170,88 170,76" fill="#93412C"/>
+        <polygon points="200,70 210,76 210,88 200,94 190,88 190,76" fill="#D59A6C"/>
+        <polygon points="170,88 180,94 180,106 170,112 160,106 160,94" fill="#E6C3A1"/>
+        <polygon points="190,88 200,94 200,106 190,112 180,106 180,94" fill="#C2703D"/>
+      </g>
+      <circle cx="180" cy="82" r="5" fill="#fff" stroke="#C92A2A" stroke-width="3"/>
+    </symbol>
+
+    <!-- Étape 2 : recommander -->
+    <symbol id="il-reco" viewBox="0 0 240 140">
+      <rect width="240" height="140" rx="16" fill="#EFEFEA"/>
+      <rect y="96" width="240" height="26" fill="#2A2F3B"/>
+      <path d="M0 109H240" stroke="#F6F6F3" stroke-width="2" stroke-dasharray="10 8"/>
+      <g>
+        <rect x="34" y="62" width="92" height="40" rx="9" fill="#0B7A52"/>
+        <rect x="34" y="62" width="92" height="8" rx="4" fill="#13A06F"/>
+        <rect x="44" y="73" width="15" height="13" rx="3" fill="#DCEFE6"/><rect x="63" y="73" width="15" height="13" rx="3" fill="#DCEFE6"/><rect x="82" y="73" width="15" height="13" rx="3" fill="#DCEFE6"/><rect x="104" y="73" width="10" height="24" rx="2" fill="#DCEFE6"/>
+        <circle cx="54" cy="104" r="7" fill="#1B1F2A"/><circle cx="108" cy="104" r="7" fill="#1B1F2A"/>
+      </g>
+      <path d="M136 70C160 46 178 44 196 52" fill="none" stroke="#C2703D" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 7"/>
+      <path d="m188 44 10 8-12 4" fill="none" stroke="#C2703D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="200" y="54" width="3" height="42" fill="#1B1F2A"/>
+      <rect x="190" y="44" width="24" height="16" rx="4" fill="#C2703D"/>
+      <circle cx="222" cy="78" r="5" fill="#4A2E20"/><rect x="216" y="85" width="12" height="11" rx="5" fill="#0B7A52"/>
+    </symbol>
+
+    <!-- Étape 3 : justifier -->
+    <symbol id="il-justify" viewBox="0 0 240 140">
+      <rect width="240" height="140" rx="16" fill="#EFEFEA"/>
+      <rect x="44" y="24" width="84" height="100" rx="8" fill="#FFFFFF" stroke="#1B1F2A" stroke-width="2.4"/>
+      <path d="M58 44H112M58 56H114M58 68H100M58 80H110M58 92H90" stroke="#9AA3B2" stroke-width="3" stroke-linecap="round"/>
+      <rect x="58" y="102" width="34" height="8" rx="4" fill="#C2703D"/>
+      <g fill="none" stroke="#0B7A52" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M176 36V104M160 104H192M150 50H202M150 50l-12 28a12 12 0 0 0 24 0L150 50ZM202 50l-12 28a12 12 0 0 0 24 0L202 50Z"/>
+      </g>
+      <circle cx="128" cy="110" r="14" fill="#0B7A52"/><path d="m121 110 5 5 9-10" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <!-- Métiers -->
+    <symbol id="il-mairie" viewBox="0 0 240 120">
+      <rect width="240" height="120" rx="16" fill="#EFEFEA"/>
+      <path d="M70 46 120 22l50 24Z" fill="#1B1F2A"/>
+      <rect x="74" y="46" width="92" height="8" fill="#3A3F4B"/>
+      <g fill="#4A505D"><rect x="80" y="56" width="8" height="40"/><rect x="98" y="56" width="8" height="40"/><rect x="116" y="56" width="8" height="40"/><rect x="134" y="56" width="8" height="40"/><rect x="152" y="56" width="8" height="40"/></g>
+      <rect x="68" y="96" width="104" height="8" fill="#1B1F2A"/>
+      <circle cx="120" cy="36" r="4" fill="#C2703D"/>
+      <circle cx="40" cy="92" r="12" fill="#0B7A52"/><circle cx="200" cy="90" r="14" fill="#13A06F"/>
+    </symbol>
+    <symbol id="il-operateur" viewBox="0 0 240 120">
+      <rect width="240" height="120" rx="16" fill="#EFEFEA"/>
+      <rect x="82" y="18" width="76" height="84" rx="14" fill="#0B7A52"/>
+      <rect x="90" y="26" width="60" height="8" rx="4" fill="#13A06F"/>
+      <rect x="92" y="40" width="56" height="30" rx="5" fill="#DCEFE6"/>
+      <circle cx="98" cy="84" r="5" fill="#C2703D"/><circle cx="142" cy="84" r="5" fill="#C2703D"/>
+      <rect x="112" y="80" width="16" height="8" rx="3" fill="#1B1F2A"/>
+      <rect x="88" y="102" width="14" height="10" rx="3" fill="#1B1F2A"/><rect x="138" y="102" width="14" height="10" rx="3" fill="#1B1F2A"/>
+      <circle cx="120" cy="13" r="0"/>
+    </symbol>
+    <symbol id="il-urbaniste" viewBox="0 0 240 120">
+      <rect width="240" height="120" rx="16" fill="#EFEFEA"/>
+      <rect x="54" y="20" width="132" height="84" rx="8" fill="#FFFFFF" stroke="#1B1F2A" stroke-width="2.4"/>
+      <path d="M54 48H186M54 76H186M98 20V104M142 20V104" stroke="#E3E2DB" stroke-width="2"/>
+      <path d="M66 94 96 66 124 72 154 40 176 34" fill="none" stroke="#0B7A52" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <g fill="#fff" stroke="#0B7A52" stroke-width="2.6"><circle cx="96" cy="66" r="5"/><circle cx="124" cy="72" r="5"/><circle cx="154" cy="40" r="5"/></g>
+      <path d="M172 78 200 106" stroke="#C2703D" stroke-width="6" stroke-linecap="round"/>
+      <path d="m168 74 6 2-2 6Z" fill="#1B1F2A"/>
+    </symbol>
   </defs>
 </svg>
 
@@ -481,7 +620,15 @@
             <div class="lp-trust"><span><b>30–60 min</b>d'anticipation</span><span><b>5 agents</b>spécialisés</span><span><b>100 %</b>des décisions sourcées</span></div>
           </div>
           <div class="lp-visual">
-            <svg class="base hexmap" data-seed="1" data-hot="0.5,0.46,1;0.74,0.7,0.6" viewBox="0 0 560 420" role="img" aria-label="Carte de densité de population en cellules hexagonales, avec une ligne de bus"></svg>
+            <svg class="il" viewBox="0 0 560 420" role="img" aria-label="Illustration : la ville, une antenne mobile, un bus de la ligne 3 et des personnes à l'arrêt"><use href="#il-hero"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="lp-in lp-sec">
+        <div class="lp-sec-head"><span class="eyebrow">Aperçu</span><h2>La ville en temps réel, et la décision à portée de main</h2><p>La densité s'affiche par quartier en cellules hexagonales. Les alertes et les recommandations apparaissent là où elles se produisent.</p></div>
+        <div class="preview">
+            <svg class="base hexmap" data-seed="1" data-hot="0.46,0.46,1;0.74,0.66,0.6" data-line="1" data-pins="1" viewBox="0 0 1100 460" role="img" aria-label="Carte de densité de population en cellules hexagonales, avec une ligne de bus"></svg>
             <div class="float-card" style="top:16px;left:16px;width:200px">
               <span class="badge b-sature"><svg aria-hidden="true"><use href="#i-alert"/></svg>Saturé à 17 h 45</span>
               <b style="font:600 14px var(--f-display)">Mokolo</b>
@@ -492,7 +639,6 @@
               <b style="font:600 14px var(--f-display)">+2 bus sur la ligne <span class="line" style="background:#D6336C;min-width:22px;height:22px">3</span></b>
               <span class="badge b-fluide" style="justify-self:start"><svg aria-hidden="true"><use href="#i-check"/></svg>Conforme sous réserve</span>
             </div>
-          </div>
         </div>
       </div>
 
@@ -500,9 +646,9 @@
         <div class="lp-in lp-sec">
           <div class="lp-sec-head"><span class="eyebrow">Fonctionnement</span><h2>Trois étapes, de l'antenne au bus</h2><p>Les données restent agrégées par zone : aucune personne n'est suivie individuellement.</p></div>
           <div class="grid-3">
-            <div class="step-card"><div class="ic"><svg aria-hidden="true"><use href="#i-antenna"/></svg></div><h3>Détecter</h3><p>Les flux entre antennes sont agrégés par quartier et par heure. Un agent surveille en continu et repère les pics avant qu'ils ne bloquent la circulation.</p></div>
-            <div class="step-card"><div class="ic"><svg aria-hidden="true"><use href="#i-bus"/></svg></div><h3>Recommander</h3><p>Un agent d'optimisation propose où envoyer les bus de réserve. L'opérateur valide ou rejette en un clic ; rien ne s'applique sans lui.</p></div>
-            <div class="step-card"><div class="ic"><svg aria-hidden="true"><use href="#i-scale"/></svg></div><h3>Justifier</h3><p>Chaque recommandation est vérifiée au regard des lois et règlements, cite l'article applicable et garde la trace complète du raisonnement.</p></div>
+            <div class="step-card"><svg class="il" viewBox="0 0 240 140" aria-hidden="true"><use href="#il-detect"/></svg><h3>Détecter</h3><p>Les flux entre antennes sont agrégés par quartier et par heure. Un agent surveille en continu et repère les pics avant qu'ils ne bloquent la circulation.</p></div>
+            <div class="step-card"><svg class="il" viewBox="0 0 240 140" aria-hidden="true"><use href="#il-reco"/></svg><h3>Recommander</h3><p>Un agent d'optimisation propose où envoyer les bus de réserve. L'opérateur valide ou rejette en un clic ; rien ne s'applique sans lui.</p></div>
+            <div class="step-card"><svg class="il" viewBox="0 0 240 140" aria-hidden="true"><use href="#il-justify"/></svg><h3>Justifier</h3><p>Chaque recommandation est vérifiée au regard des lois et règlements, cite l'article applicable et garde la trace complète du raisonnement.</p></div>
           </div>
         </div>
       </div>
@@ -510,9 +656,9 @@
       <div class="lp-in lp-sec">
         <div class="lp-sec-head"><span class="eyebrow">Pour qui</span><h2>Un outil, trois métiers</h2></div>
         <div class="grid-3">
-          <div class="persona"><span class="badge b-primary" style="justify-self:start">Municipalité</span><h3>Gestionnaire urbain</h3><ul><li>Carte de la ville en temps réel</li><li>Alertes anticipées et plans de contingence</li><li>Questions en langage naturel au superviseur</li></ul></div>
-          <div class="persona"><span class="badge b-primary" style="justify-self:start">Exploitant</span><h3>Opérateur de bus</h3><ul><li>Arrêts en tension, ligne par ligne</li><li>Réaffectations proposées et justifiées</li><li>Mesure de l'impact sur l'attente</li></ul></div>
-          <div class="persona"><span class="badge b-primary" style="justify-self:start">Planification</span><h3>Urbaniste</h3><ul><li>Simulation d'événements et de travaux</li><li>Comparaison avant / après</li><li>Registre des manques réglementaires</li></ul></div>
+          <div class="persona"><svg class="il" viewBox="0 0 240 120" aria-hidden="true"><use href="#il-mairie"/></svg><span class="badge b-primary" style="justify-self:start">Municipalité</span><h3>Gestionnaire urbain</h3><ul><li>Carte de la ville en temps réel</li><li>Alertes anticipées et plans de contingence</li><li>Questions en langage naturel au superviseur</li></ul></div>
+          <div class="persona"><svg class="il" viewBox="0 0 240 120" aria-hidden="true"><use href="#il-operateur"/></svg><span class="badge b-primary" style="justify-self:start">Exploitant</span><h3>Opérateur de bus</h3><ul><li>Arrêts en tension, ligne par ligne</li><li>Réaffectations proposées et justifiées</li><li>Mesure de l'impact sur l'attente</li></ul></div>
+          <div class="persona"><svg class="il" viewBox="0 0 240 120" aria-hidden="true"><use href="#il-urbaniste"/></svg><span class="badge b-primary" style="justify-self:start">Planification</span><h3>Urbaniste</h3><ul><li>Simulation d'événements et de travaux</li><li>Comparaison avant / après</li><li>Registre des manques réglementaires</li></ul></div>
         </div>
       </div>
 
@@ -566,7 +712,7 @@
         <div class="login-side">
           <div class="logo"><svg aria-hidden="true"><use href="#logo-inv"/></svg><b>Flow<span>Pulse</span></b></div>
           <div style="display:grid;gap:14px"><h2>La ville en mouvement, décision par décision.</h2><p>Supervision du trafic, alertes anticipées et réaffectation des bus, avec la justification de chaque recommandation.</p></div>
-          <div class="mini"><svg class="base hexmap" data-seed="4" data-hot="0.35,0.45,1;0.72,0.3,0.6" data-dark="1" viewBox="0 0 520 220" aria-hidden="true"></svg></div>
+          <div class="mini"><svg class="il" viewBox="0 0 560 420" aria-hidden="true"><use href="#il-hero"/></svg></div>
         </div>
         <div class="login-form">
           <form onsubmit="return false">
