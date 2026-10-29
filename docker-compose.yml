@@ -15,6 +15,9 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./infra/postgres/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+    # Accessible depuis la machine seulement, pour lancer le backend hors Docker (15432 : évite les PostgreSQL déjà installés sur 5432 et suivants)
+    ports:
+      - "127.0.0.1:${DB_PORT:-15432}:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-flowpulse} -d flowpulse"]
       interval: 5s
