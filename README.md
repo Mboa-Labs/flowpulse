@@ -21,29 +21,23 @@ Ce dépôt est le point d'entrée du projet : conception, documentation et orche
 
 ## Démarrer
 
-Prérequis : Git, Docker Desktop (16 Go de RAM recommandés pour le modèle de langage local).
-
-Les dépôts doivent être clonés côte à côte :
+Prérequis : Git, Docker Desktop, [Ollama](https://ollama.com/download) installé sur la machine (16 Go de RAM recommandés).
 
 ```bash
 mkdir flowpulse-workspace && cd flowpulse-workspace
-for r in flowpulse flowpulse-frontend flowpulse-backend flowpulse-ai-service flowpulse-knowledge-base; do
-  git clone https://github.com/Mboa-Labs/$r.git
-done
+git clone https://github.com/Mboa-Labs/flowpulse.git
+bash flowpulse/scripts/installer.sh            # clone les autres dépôts, crée le .env
 
+ollama pull qwen2.5:7b && ollama pull nomic-embed-text
 cd flowpulse
-cp .env.example .env                       # puis adapter les mots de passe
 docker compose up -d --build
-docker compose exec ollama ollama pull qwen2.5:14b
-docker compose exec ollama ollama pull nomic-embed-text
-docker compose exec ai-service python /kb/scripts/ingest.py   # indexe la base de connaissances
+docker compose exec ai-service python /kb/scripts/ingest.py --all   # indexe la base de connaissances
+bash scripts/verifier.sh
 ```
 
-| Service | Adresse |
-| --- | --- |
-| Application | <http://localhost:8081> (compte initial : `ADMIN_EMAIL` / `ADMIN_PASSWORD` du `.env`) |
-| API backend (Swagger) | <http://localhost:8080/swagger-ui.html> |
-| Service IA (Swagger) | <http://localhost:8000/docs> |
+Application : <http://localhost:8081>. Comptes de démonstration : `gestionnaire@`, `operateur@`, `urbaniste@flowpulse.local` (mot de passe `DEMO_PASSWORD` du `.env`), et l'administrateur `ADMIN_EMAIL`.
+
+Guide complet pour héberger FlowPulse sur un MacBook et le tester depuis un autre PC, avec le scénario de test : [docs/HEBERGEMENT_MAC.md](docs/HEBERGEMENT_MAC.md).
 
 ## Contenu de ce dépôt
 
@@ -52,7 +46,8 @@ docker compose exec ai-service python /kb/scripts/ingest.py   # indexe la base d
 | [`conception/architecture/`](conception/architecture/) | Architecture v2 (source HTML + image) |
 | [`conception/diagrammes/`](conception/diagrammes/) | Diagrammes UML (sources PlantUML + PNG/SVG) |
 | [`docs/`](docs/) | Fiches projet et description des cas d'utilisation |
-| [`infra/`](infra/) | Initialisation de PostgreSQL / PostGIS |
+| [`infra/`](infra/) | Initialisation de PostgreSQL |
+| [`scripts/`](scripts/) | Installation, mise à jour et vérification de la stack |
 
 ## Équipe
 

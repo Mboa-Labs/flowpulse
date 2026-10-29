@@ -1,8 +1,13 @@
 name: flowpulse
 
+# Les dépôts flowpulse-* doivent être clonés côte à côte (voir README).
+# Par défaut, Ollama tourne directement sur la machine hôte (sur Mac, il utilise alors la puce
+# graphique Apple). Sur un serveur Linux sans Ollama installé : docker compose --profile ollama up -d
+# et OLLAMA_URL=http://ollama:11434 dans le .env.
+
 services:
   postgres:
-    image: postgis/postgis:16-3.4
+    image: postgres:16
     environment:
       POSTGRES_DB: flowpulse
       POSTGRES_USER: ${DB_USER:-flowpulse}
@@ -10,40 +15,31 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./infra/postgres/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
-    ports:
-      - "5432:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-flowpulse} -d flowpulse"]
       interval: 5s
       retries: 20
+    restart: unless-stopped
 
   ollama:
+    profiles: ["ollama"]
     image: ollama/ollama:latest
     volumes:
       - ollama:/root/.ollama
-    ports:
-      - "11434:11434"
-    # GPU NVIDIA : décommenter si disponible
-    # deploy:
-    #   resources:
-    #     reservations:
-    #       devices:
-    #         - driver: nvidia
-    #           count: all
-    #           capabilities: [gpu]
+    restart: unless-stopped
 
   ai-service:
     build: ../flowpulse-ai-service
     environment:
-      FLOWPULSE_OLLAMA_URL: http://ollama:11434
+      FLOWPULSE_OLLAMA_URL: ${OLLAMA_URL:-http://host.docker.internal:11434}
+      FLOWPULSE_LLM_MODEL: ${LLM_MODEL:-qwen2.5:7b}
       FLOWPULSE_CHROMA_DIR: /kb/chroma
       FLOWPULSE_BACKEND_URL: http://backend:8080
     volumes:
       - ../flowpulse-knowledge-base:/kb
-    depends_on:
-      - ollama
-    ports:
-      - "8000:8000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
 
   backend:
     build: ../flowpulse-backend
@@ -53,21 +49,23 @@ services:
       DB_PASSWORD: ${DB_PASSWORD:-flowpulse}
       JWT_SECRET: ${JWT_SECRET:-dev-only-change-me-dev-only-change-me-0123456789}
       AI_SERVICE_URL: http://ai-service:8000
-      CORS_ORIGINS: http://localhost:8081
       ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@flowpulse.local}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin123}
+      DEMO_USERS: ${DEMO_USERS:-false}
+      DEMO_PASSWORD: ${DEMO_PASSWORD:-demo1234}
     depends_on:
       postgres:
         condition: service_healthy
-    ports:
-      - "8080:8080"
+    restart: unless-stopped
 
+  # Seul point d'entrée exposé : l'interface et son proxy /api vers le backend
   frontend:
     build: ../flowpulse-frontend
     depends_on:
       - backend
     ports:
-      - "8081:80"
+      - "${APP_PORT:-8081}:80"
+    restart: unless-stopped
 
 volumes:
   pgdata:
