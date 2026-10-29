@@ -87,7 +87,7 @@ Ouvrez **http://192.168.1.42:8081** (l'IP du Mac) dans votre navigateur. Vous po
 | `admin@flowpulse.local` | valeur `ADMIN_PASSWORD` du `.env` | Administration |
 | `gestionnaire@flowpulse.local` | `demo1234` | Tableau de bord |
 | `operateur@flowpulse.local` | `demo1234` | Flotte |
-| `urbaniste@flowpulse.local` | `demo1234` | Simulation (écran à venir) |
+| `urbaniste@flowpulse.local` | `demo1234` | Simulation |
 
 ### Scénario de test
 
@@ -101,6 +101,7 @@ Cocher chaque point ; noter tout écart avec l'heure et le compte utilisé.
 - [ ] **Application** : « Appliquer la recommandation » → statut « Appliquée ». Impossible de l'appliquer une deuxième fois.
 - [ ] **Superviseur** (gestionnaire ou opérateur) : « Vérifie le trafic à Grand Dakar et propose des bus si besoin » → réponse chiffrée, outils utilisés, une nouvelle recommandation à valider dans Flotte, raisonnement consultable.
 - [ ] **Question réglementaire** : « Qui est compétent pour organiser le transport urbain ? » → réponse qui cite un texte (après indexation).
+- [ ] **Simulation** (urbaniste) : « Fermeture d'un axe » à Grand Dakar → la charge de Grand Dakar dépasse 100 %, le trafic se reporte sur Dakar Plateau et Almadies, et chaque mesure reçoit un verdict de conformité. Rien n'est ajouté dans Flotte.
 - [ ] **Manques réglementaires** : les décisions sans texte applicable apparaissent dans la liste.
 - [ ] **Droits** : l'urbaniste ne voit pas le bouton de surveillance ; le gestionnaire ne peut pas appliquer une recommandation.
 - [ ] **Administration** (admin) : créer un compte, s'y connecter, le désactiver.
