@@ -14,7 +14,8 @@ done
 cd flowpulse
 if [ ! -f .env ]; then
   cp .env.example .env
-  secret=$(LC_ALL=C tr -dc 'A-Za-z0-9' </dev/urandom | head -c 48)
+  # Lecture finie de /dev/urandom : avec « set -o pipefail », « tr < /dev/urandom | head » échoue (signal SIGPIPE)
+  secret=$(head -c 4096 /dev/urandom | LC_ALL=C tr -dc 'A-Za-z0-9' | cut -c1-48)
   sed -i.bak "s/^JWT_SECRET=.*/JWT_SECRET=$secret/" .env && rm -f .env.bak
   echo "• .env créé (clé JWT générée). Changez ADMIN_PASSWORD avant une démo publique."
 fi

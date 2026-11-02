@@ -8,7 +8,8 @@ cd "$(dirname "$0")/.."
 bash scripts/installer.sh
 
 set_env() { grep -q "^$1=" .env && sed -i "s|^$1=.*|$1=$2|" .env || echo "$1=$2" >> .env; }
-random() { LC_ALL=C tr -dc 'A-Za-z0-9' </dev/urandom | head -c "$1"; }
+# Lecture finie de /dev/urandom : « tr < /dev/urandom | head » échoue avec pipefail (signal SIGPIPE, code 141)
+random() { head -c 4096 /dev/urandom | LC_ALL=C tr -dc 'A-Za-z0-9' | cut -c1-"$1"; }
 
 # Ollama dans Docker (profil « ollama ») et petit modèle : 4 cœurs sans carte graphique
 set_env COMPOSE_PROFILES ollama
@@ -23,6 +24,9 @@ if [ ! -f .codespace-done ]; then
   set_env ADMIN_PASSWORD "$(random 14)"
   set_env DEMO_PASSWORD "$(random 10)"
 fi
+# Clé de signature des jetons : jamais la valeur d'exemple
+grep -q '^JWT_SECRET=remplacer' .env && set_env JWT_SECRET "$(random 48)"
+true
 
 docker compose up -d --build
 model=$(grep '^LLM_MODEL=' .env | cut -d= -f2)
