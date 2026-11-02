@@ -37,10 +37,10 @@ if any(c["email"] == os.environ["EMAIL"] for c in comptes):
     raise SystemExit("Un compte existe déjà avec cet email : changer son rôle depuis l'écran Administration.")
 nouveau = appel("POST", "/admin/users", {"nom": os.environ["NOM"], "email": os.environ["EMAIL"],
                                           "password": os.environ["MDP"], "role": "ADMIN"}, jeton)
-# Vérifier que le nouveau compte fonctionne avant de désactiver l'ancien
-appel("POST", "/auth/login", {"email": os.environ["EMAIL"], "password": os.environ["MDP"]})
+# Le nouveau compte doit fonctionner avant de désactiver l'ancien ; c'est lui qui le désactive (journal d'audit)
+jeton_nouveau = appel("POST", "/auth/login", {"email": os.environ["EMAIL"], "password": os.environ["MDP"]})["accessToken"]
 ancien = next(c for c in comptes if c["email"] == os.environ["ANCIEN_EMAIL"])
-appel("PATCH", f"/admin/users/{ancien['id']}", {"actif": False}, jeton)
+appel("PATCH", f"/admin/users/{ancien['id']}", {"actif": False}, jeton_nouveau)
 print(f"Compte administrateur créé : {nouveau['email']}. Ancien compte {ancien['email']} désactivé.")
 PY
 
