@@ -41,6 +41,8 @@ services:
       FLOWPULSE_DATABASE_URL: postgresql://${DB_USER:-flowpulse}:${DB_PASSWORD:-flowpulse}@postgres:5432/flowpulse
     volumes:
       - ../flowpulse-knowledge-base:/kb
+      # Sorties du pipeline D4D (séries, zones, modèles), si elles ont été produites ; sinon données de démonstration
+      - ../flowpulse-ai-service/pipeline/sortie:/app/pipeline/sortie:ro
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
