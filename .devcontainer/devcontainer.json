@@ -1,0 +1,25 @@
+{
+  "name": "FlowPulse",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "hostRequirements": { "cpus": 4, "memory": "16gb", "storage": "32gb" },
+  "customizations": {
+    "codespaces": {
+      "repositories": {
+        "Mboa-Labs/flowpulse-frontend": { "permissions": { "contents": "read" } },
+        "Mboa-Labs/flowpulse-backend": { "permissions": { "contents": "read" } },
+        "Mboa-Labs/flowpulse-ai-service": { "permissions": { "contents": "read" } },
+        "Mboa-Labs/flowpulse-knowledge-base": { "permissions": { "contents": "read" } }
+      }
+    }
+  },
+  "forwardPorts": [8081],
+  "portsAttributes": {
+    "8081": { "label": "FlowPulse", "onAutoForward": "notify" }
+  },
+  "postCreateCommand": "bash scripts/codespace.sh",
+  "postStartCommand": "docker compose up -d"
+}

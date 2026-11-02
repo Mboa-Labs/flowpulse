@@ -39,6 +39,8 @@ Application : <http://localhost:8081>. Comptes de démonstration : `gestionnaire
 
 Guide complet pour héberger FlowPulse sur un MacBook et le tester depuis un autre PC, avec le scénario de test : [docs/HEBERGEMENT_MAC.md](docs/HEBERGEMENT_MAC.md).
 
+Sans machine à disposition : FlowPulse tourne aussi dans **GitHub Codespaces** (Code → Codespaces → New with options, machine 4 cœurs / 16 Go), installation automatique : [docs/CODESPACES.md](docs/CODESPACES.md).
+
 ## Contenu de ce dépôt
 
 | Dossier | Contenu |
