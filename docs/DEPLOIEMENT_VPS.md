@@ -164,13 +164,36 @@ cd ~/flowpulse-workspace/flowpulse && gunzip -c ~/flowpulse-sauvegardes/<fichier
 
 Pour une sécurité complète, copier régulièrement ce dossier hors du serveur.
 
+## Étape 7 : déploiement automatique
+
+Chaque dépôt a des tests qui tournent sur GitHub à chaque `git push` (GitHub Actions : tests du backend et du service IA, compilation de l'interface, vérification de la configuration Docker et de l'inventaire des textes). Toutes les 5 minutes, le serveur regarde s'il existe une nouvelle version **dont les tests ont réussi** ; si oui, il la récupère, reconstruit les services et vérifie que tout répond. Une version dont les tests échouent n'est jamais déployée.
+
+Le serveur va lui-même chercher les versions (avec l'accès GitHub de l'étape 2) : aucune clé SSH du serveur n'est confiée à GitHub.
+
+Activer (une seule fois, sans sudo) :
+
+```bash
+(crontab -l 2>/dev/null; echo "*/5 * * * * bash $HOME/flowpulse-workspace/flowpulse/scripts/deploiement-auto.sh >> $HOME/flowpulse-deploiements.log 2>&1") | crontab -
+```
+
+Suivre les déploiements :
+
+```bash
+tail -f ~/flowpulse-deploiements.log
+```
+
+Désactiver temporairement (avant une démonstration, pour figer la version) : `crontab -e` et ajouter `#` devant la ligne `deploiement-auto.sh`.
+
+Si les textes de loi changent dans `flowpulse-knowledge-base`, la base de connaissances est réindexée automatiquement après le déploiement.
+
 ## Au quotidien
 
 Toutes les commandes se lancent dans `~/flowpulse-workspace/flowpulse`.
 
 | Action | Commande |
 | --- | --- |
-| Mettre à jour (dernières versions de GitHub) | `bash scripts/mettre-a-jour.sh` |
+| Mettre à jour tout de suite, sans attendre le déploiement automatique | `bash scripts/mettre-a-jour.sh` |
+| Lancer une commande longue sans risquer la coupure SSH | `tmux new -s flowpulse`, lancer la commande, `Ctrl + B` puis `D` pour se détacher ; `tmux attach -t flowpulse` pour revenir |
 | État des services | `docker compose ps` |
 | Mémoire et processeur utilisés | `docker stats --no-stream` |
 | Journaux d'un service | `docker compose logs -f --tail 100 backend` (ou `ai-service`, `frontend`, `ollama`) |

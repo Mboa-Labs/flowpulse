@@ -1,0 +1,18 @@
+# Intégration continue : configuration Docker et scripts valides avant tout déploiement.
+name: Vérifications
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  verifications:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configuration Docker (développement et production)
+        run: |
+          docker compose config -q
+          COMPOSE_FILE=docker-compose.yml:docker-compose.prod.yml COMPOSE_PROFILES=ollama docker compose config -q
+      - name: Syntaxe des scripts
+        run: for f in scripts/*.sh; do bash -n "$f"; done
