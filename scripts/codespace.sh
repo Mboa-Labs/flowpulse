@@ -15,6 +15,8 @@ random() { head -c 4096 /dev/urandom | LC_ALL=C tr -dc 'A-Za-z0-9' | cut -c1-"$1
 set_env COMPOSE_PROFILES ollama
 set_env OLLAMA_URL http://ollama:11434
 set_env DEMO_USERS true
+# La page est servie par le proxy de GitHub (https://<codespace>-8081.app.github.dev) : origine à autoriser
+set_env CORS_ORIGINS "https://*.app.github.dev"
 
 # Première installation seulement : modèle léger, et mots de passe aléatoires car le lien
 # du Codespace peut être rendu public
