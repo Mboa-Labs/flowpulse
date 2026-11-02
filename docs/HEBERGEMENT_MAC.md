@@ -102,6 +102,11 @@ Cocher chaque point ; noter tout écart avec l'heure et le compte utilisé.
 - [ ] **Superviseur** (gestionnaire ou opérateur) : « Vérifie le trafic à Grand Dakar et propose des bus si besoin » → réponse chiffrée, outils utilisés, une nouvelle recommandation à valider dans Flotte, raisonnement consultable.
 - [ ] **Question réglementaire** : « Qui est compétent pour organiser le transport urbain ? » → réponse qui cite un texte (après indexation).
 - [ ] **Simulation** (urbaniste) : « Fermeture d'un axe » à Grand Dakar → la charge de Grand Dakar dépasse 100 %, le trafic se reporte sur Dakar Plateau et Almadies, et chaque mesure reçoit un verdict de conformité. Rien n'est ajouté dans Flotte.
+- [ ] **Alertes** (gestionnaire) : chaque alerte affiche un plan de contingence. « Acquitter » puis « Transmettre… » à la police municipale : le statut et l'historique se mettent à jour.
+- [ ] **Offre et demande par arrêt** (opérateur, écran Flotte) : 8 arrêts triés par tension, Rond-point Colobane en tête (140 %).
+- [ ] **Journal d'audit** (admin) : les actions précédentes y figurent avec l'auteur ; « Exporter en CSV » télécharge le fichier.
+- [ ] **Base de connaissances** (admin) : 21 textes inventoriés ; « Réindexer les textes » passe à « en cours », puis le nombre de passages par texte s'affiche.
+- [ ] **Redémarrage** : `docker compose restart ai-service`, puis vérifier que recommandations, alertes et simulations sont toujours là.
 - [ ] **Manques réglementaires** : les décisions sans texte applicable apparaissent dans la liste.
 - [ ] **Droits** : l'urbaniste ne voit pas le bouton de surveillance ; le gestionnaire ne peut pas appliquer une recommandation.
 - [ ] **Administration** (admin) : créer un compte, s'y connecter, le désactiver.
