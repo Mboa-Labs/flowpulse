@@ -32,6 +32,9 @@ services:
 
   ai-service:
     <<: *journaux
+    environment:
+      # Autant de fils que de cœurs accordés à Ollama (3) : sinon il en lance 6 et s'étrangle sous la limite
+      FLOWPULSE_LLM_THREADS: "3"
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/ai/horloge', timeout=5)"]
       interval: 30s
