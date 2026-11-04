@@ -38,6 +38,8 @@ services:
       FLOWPULSE_LLM_MODEL: ${LLM_MODEL:-qwen2.5:7b}
       FLOWPULSE_CHROMA_DIR: /kb/chroma
       FLOWPULSE_BACKEND_URL: http://backend:8080
+      # Territoire présenté : yaounde (profils de Dakar transposés) ou dakar (données réelles brutes)
+      FLOWPULSE_TERRITOIRE: ${TERRITOIRE:-yaounde}
       FLOWPULSE_DATABASE_URL: postgresql://${DB_USER:-flowpulse}:${DB_PASSWORD:-flowpulse}@postgres:5432/flowpulse
     volumes:
       - ../flowpulse-knowledge-base:/kb
