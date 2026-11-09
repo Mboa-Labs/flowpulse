@@ -270,7 +270,7 @@ Les lots se chevauchent pour que les quatre membres travaillent en parallèle d�
 
 ## Questions ouvertes
 
-- [ ] Composition de l'équipe : le règlement limite à 4 personnes (4 participants, ou 3 + 1 mentor interne). L'équipe déclare 4 membres + 1 mentor : à confirmer auprès des organisateurs.
+- [x] Composition de l'équipe : le règlement limite à 4 personnes (4 participants, ou 3 + 1 mentor interne). L'équipe compte 4 membres, dont le chef d'équipe, KAMDEM FOSSO Emile Cabrel.
 - [ ] Désigner une cheffe d'équipe pour l'éligibilité au prix Women's Team (600 CHF).
 - [ ] Dataset : granularité, agrégats ou données individuelles, période, présence de données de bus.
 - [ ] Modèle Ollama retenu selon la machine de démo (RAM, GPU) : test de qualité en français et d'appels d'outils.

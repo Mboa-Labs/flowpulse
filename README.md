@@ -81,12 +81,10 @@ Other guides (in French): hosting on a Mac and testing from another PC ([docs/HE
 
 ## Team
 
-- KAMDEM FOSSO Emile Cabrel
+- KAMDEM FOSSO Emile Cabrel (team leader)
 - DJAHA TCHESSEU Yvanna
 - TIOMELA ZANGUE Jorel
 - TSEMEGNE Martin Yvan
-
-Mentor: Valery MONTHE
 
 ## License
 
