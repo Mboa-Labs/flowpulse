@@ -10,6 +10,7 @@ FlowPulse turns aggregated mobile-network activity into an hourly tension index 
 | --- | --- |
 | Live prototype | <https://flowpulse2.duckdns.org> (demo accounts on request) |
 | Technical report (5 pages, official template) | [PDF](docs/soumission/FlowPulse_Technical_Report.pdf) · [DOCX](docs/soumission/FlowPulse_Technical_Report.docx) |
+| Demo video (4 min 20, English) | [Google Drive](https://drive.google.com/drive/folders/1jmL48VyeIpmjeeFevlLqCZmn04I6ZY2B?usp=sharing) · [script](docs/soumission/Demo_video_script.md) |
 | User guide (French, 15 pages, screenshots) | [PDF](docs/soumission/FlowPulse-Guide-utilisation.pdf) |
 | Knowledge base | [flowpulse-knowledge-base](https://github.com/Mboa-Labs/flowpulse-knowledge-base) |
 | Regulatory gap register | [manques_reglementaires.csv](https://github.com/Mboa-Labs/flowpulse-knowledge-base/blob/main/registres/manques_reglementaires.csv) |
