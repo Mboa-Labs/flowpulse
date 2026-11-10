@@ -87,6 +87,8 @@ Other guides (in French): hosting on a Mac and testing from another PC ([docs/HE
 - TIOMELA ZANGUE Jorel
 - TSEMEGNE Martin Yvan
 
+Mentor: Dr Valery Monthe
+
 ## License
 
 Code: [MIT](LICENSE). Documents reproduced in the knowledge base keep their own rights (see the knowledge base README).
